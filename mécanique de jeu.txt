@@ -1,0 +1,36 @@
+Mécanique de jeu :
+
+   On a une ville qu'il faut fournir en éléctricité. Pour cela il faut construire des sources d'énergie. 
+   Les sources d'énergie peuvent + ou - polluer selon leur type.
+   Il est possible d'acheter et de construire des habitations pour pouvoir accueillir les potentiels habitants qui viendraient
+   Le nombre d'habitants augmente lorsque le prix de l'élécricité est faible et que le niveau de pollution est faible aussi.
+   Plus le nombre d'habitants augmente, plus on gagne d'argent, plus on peut construire des nouvelles sources d'énergies...
+   Attention, la production d'élécricité dépend des caractéristiques dynamiques de la map. 
+   C'est à dire que celle-ci peut chuter s'il y a moins de vent ou de soleil.
+   Dans ce cas là, le prix augmente, le nombre d'habitant cesse d'augmenter, et toute l'évolution est ralentit.
+   Le but est donc de trouver un équilibre pour continuer d'évoluer le plus rapidement possible.
+
+
+
+Ressource :
+
+	- argent : pour construire, gagné selon le nombre d'habitants
+
+Indicateurs :
+
+	- pollution : centrale charbon/nucléaire pollue, énergie renouvellable pollue pas
+	- éléctricité produite : en kwh
+	- prix éléctricité : production d'énergie / (nb d'habitants * type de logement)
+
+
+Sources d'énergies :
+
+	- renouvelables : variation selon le temps/la zone, faible pollution
+			 - éoliennes :         coût 4/10, production 4/10, pollution 1/10, variation 5/5
+			 - panneaux solaires : coût 2/10, production 2/10, pollution 3/10, variation 3/5
+			 - hydraulique :       coût 7/10, production 6/10, pollution 4/10, variation 3/5
+				
+	- fossiles : production constante, forte pollution
+		    - charbon :   coût 6/10,  production 5/10, pollution 10/10, variation 1/10
+	            - gaz : 	  coût 7/10,  production 7/10, pollution 8/10,  variation 0/10
+		    - nucléaire : coût 10/10, production 8/10, pollution 7/10,	variation 0/10
