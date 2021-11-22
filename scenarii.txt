@@ -1,0 +1,20 @@
+Nom: acheter batiment
+Auteur: Utilisateur
+Données d'entrée: 
+Le cas d'utilisation commence lorsque le client sur le bouton "acheter un bâtiment"
+
+Scénario principal: 
+1. Le système propose le type de bâtiment à acheter
+2. L'utilisateur choisit le type de bâtiment à acheter
+3. Le système vérifie si l'utilisateur est soldable en fonction du bâtiment choisit
+4. Si le solde est suffisant, l'utilisateur choisit un emplacement pour le bâtiment
+5. Le système vérifie si l'emplacement est disponible
+6. Si l'emplacement est libre, le système vérifie la ressource disponible de l'emplacement 
+    en fonction du type de bâtiment choisi
+7. Si la ressource est disponible, le bâtiment est placé sur l'emplacement
+
+Cas particulier:
+4a. Le solde est insuffisant, impossible d'acheter le bâtiment choisi, retour à l'étape 2
+6a. L'emplacement n'est pas libre, il faut en choisir un autre, retour à l'étape 4
+7a. La ressource en accord avec le bâtiment n'est pas disponible, impossible de poser ce 
+    bâtiment dans cette emplacement, retour à l'étape 4
