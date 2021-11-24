@@ -1,5 +1,3 @@
-import javax.swing.text.BoxView;
-
 public class Map
 {
     public final int NB_BOX_X=50;
