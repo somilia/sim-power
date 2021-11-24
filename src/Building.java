@@ -1,6 +1,9 @@
 
-public class Building {
-	
-	
+public class Building
+{
 	private int size;
+	
+	public Building(){
+		
+	}
 }
