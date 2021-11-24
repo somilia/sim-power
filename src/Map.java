@@ -10,6 +10,15 @@ public class Map
 
     private Box[][] boxList;
 
+    public buildBuilding(BuildingType choiceBuilding){
+    	if (this.building == true) {
+    		return 0;
+    	} else if (choiceBuilding != HOME){
+    		return 1;
+    	} else {
+    		return 0;
+    	}
+    }
 
 
     public Map(){

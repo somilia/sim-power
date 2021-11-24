@@ -1,3 +1,6 @@
+public enum BuildingType {
+    HOME, NUCLEAR, SOLAR, HYDRAULIC, COAL 
+}
 public class Box
 {
     private int wind;
@@ -9,6 +12,7 @@ public class Box
     private boolean uranium;
 
     private boolean building;
+    private enum BuildingType buildingType;
 
 
     public Box(){
