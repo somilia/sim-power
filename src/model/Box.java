@@ -1,6 +1,5 @@
-public enum BuildingType {
-    HOME, NUCLEAR, SOLAR, HYDRAULIC, COAL 
-}
+package model;
+
 public class Box
 {
     private int wind;
@@ -11,13 +10,12 @@ public class Box
     private boolean coal;
     private boolean uranium;
 
-    private boolean building;
-    private enum BuildingType buildingType;
+    private boolean containBuilding;
+    private  BuildingType buildingType;
 
 
     public Box(){
-
-        building=false;
+        containBuilding=false;
     }
 
 }

@@ -1,3 +1,5 @@
+package model;
+
 public class Map
 {
     public final int NB_BOX_X=50;
@@ -10,7 +12,7 @@ public class Map
 
     private Box[][] boxList;
 
-    public buildBuilding(BuildingType choiceBuilding){
+/*    public buildBuilding(model.BuildingType choiceBuilding){
     	if (this.building == true) {
     		return 0;
     	} else if (choiceBuilding != HOME){
@@ -19,7 +21,7 @@ public class Map
     		return 0;
     	}
     }
-
+*/
 
     public Map(){
 
