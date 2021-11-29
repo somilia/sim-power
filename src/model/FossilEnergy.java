@@ -1,13 +1,12 @@
 package model;
 
-import model.EnergySources;
+public class FossilEnergy extends EnergySources {
+    protected int pollutionRate;
 
-public class FossilEnergy extends EnergySources
-{
+    public void genElectricity() {
+    }
 
-	public int genElectricity() {}
-	
-	public FossilEnergy(){
-		
-	}
+    public FossilEnergy() {
+
+    }
 }

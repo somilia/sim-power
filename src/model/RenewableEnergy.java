@@ -4,7 +4,7 @@ import model.EnergySources;
 
 public class RenewableEnergy extends EnergySources
 {
-	public int genElectricity(){}
+	public void genElectricity(){}
 	
 	public RenewableEnergy(){
 		

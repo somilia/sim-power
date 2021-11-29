@@ -45,5 +45,8 @@ public class Map {
     public void buildBuilding() {
     }
 
+    public void updateData() {
+    }
+
 
 }
