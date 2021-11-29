@@ -10,17 +10,8 @@ public class Map {
     private float pollutionRate;
 
     private Box[][] boxList;
+    private int userMoney;
 
-/*    public buildBuilding(model.BuildingType choiceBuilding){
-    	if (this.building == true) {
-    		return 0;
-    	} else if (choiceBuilding != HOME){
-    		return 1;
-    	} else {
-    		return 0;
-    	}
-    }
-*/
 
     public Map() {
 
