@@ -11,7 +11,7 @@ public class Box
     private boolean uranium;
 
     private boolean containBuilding;
-    private  BuildingType buildingType;
+    private Building building;
 
 
     public Box(){
