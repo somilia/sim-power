@@ -7,6 +7,11 @@ public class GameController {
     private GameFrame frame;
     private Map map;
 
+    private BuildingListener buildingListener;
+    private BuildBuildingListener buildBuildingListener;
+    private SetBuildingListener setBuildingListener;
+
+
     GameController(){
         frame = new GameFrame(this);
         map = new Map();

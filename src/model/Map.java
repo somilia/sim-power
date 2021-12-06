@@ -10,7 +10,6 @@ public class Map {
     private float pollutionRate;
     private int userMoney;
 
-
     private Box[][] boxList;
 
 

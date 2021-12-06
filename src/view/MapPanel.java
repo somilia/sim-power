@@ -16,6 +16,8 @@ public class MapPanel extends JPanel {
 
     private List<BuildingView> buildingViewList;
 
+
+
     MapPanel() {
         buildingViewList = new ArrayList<BuildingView>();
         this.setLayout(null);

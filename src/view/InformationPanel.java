@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class InformationPanel extends JPanel {
 
@@ -10,17 +11,20 @@ public class InformationPanel extends JPanel {
     public static final int INFO_PANEL_COORD_X = 0;
     public static final int INFO_PANEL_COORD_Y = 0;
 
-    private int nbOfHabitants;
+    /*private int nbOfHabitants;
     private int energyProduced;
     private float energyPrice;
     private float pollutionRate;
-    private int userMoney;
+    private int userMoney;*/
 
-    /**
-     * On a le choix entre créer un tableaux statique de label pour afficher les 5 attributs ci-dessus
-     * Ou alors on instancie 5 JLabel et on les ajoutent à un une ArrayList
-     * Ou alors on crée notre propre classe qui extends JLabel et on les instancient et on les ajoutent à une ArrayList
-     */
+    private JLabel nbOfHabitantsLabel;
+    private JLabel energyProducedLabel;
+    private JLabel energyPriceLabel;
+    private JLabel pollutionRateLabel;
+    private JLabel userMoneyLabel;
+
+    private List<JLabel> labelList;
+
 
     InformationPanel(){
         this.setLayout(null);
