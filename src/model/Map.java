@@ -1,16 +1,18 @@
 package model;
 
 public class Map {
-    public final int NB_BOX_X = 50;
-    public final int NB_BOX_Y = 50;
+    public final int NB_BOX_X = 32;
+    public final int NB_BOX_Y = 18;
 
     private int nbOfHabitants;
     private int energyProduced;
     private float energyPrice;
     private float pollutionRate;
+    private int userMoney;
+
 
     private Box[][] boxList;
-    private int userMoney;
+
 
 
     public Map() {

@@ -1,10 +1,10 @@
 package model;
 
-public class Building
-{
-	private int size;
-	
-	public Building(){
-		
-	}
+public class Building {
+    private int size;
+    private int price;
+
+    public Building() {
+
+    }
 }
