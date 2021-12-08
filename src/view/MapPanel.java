@@ -1,5 +1,6 @@
 package view;
 
+import model.Box;
 import model.BuildingType;
 
 import javax.swing.*;
@@ -7,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapPanel extends JPanel {
+public class MapPanel extends JPanel implements MapViewable{
 
     public static final int MAP_PANEL_WIDTH = 1024;
     public static final int MAP_PANEL_HEIGHT = 576;
@@ -32,7 +33,18 @@ public class MapPanel extends JPanel {
         return (new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
     }
 
-    public void addBuilding(BuildingType type, int positionX, int positionY) {
+
+
+
+    @Override
+    public void initializeMap(Box[][] boxes) {
+
     }
+
+    @Override
+    public void addBuilding(BuildingType buildingType, int positionX, int positionY) {
+
+    }
+
 }
 

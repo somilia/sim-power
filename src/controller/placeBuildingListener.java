@@ -3,8 +3,9 @@ package controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
-public class SetBuildingListener implements MouseMotionListener {
+public class placeBuildingListener implements MouseMotionListener {
     /**
+     *                                                                       INUTILE JE CROIS
      * Invoked when a mouse button is pressed on a component and then
      * dragged.  {@code MOUSE_DRAGGED} events will continue to be
      * delivered to the component where the drag originated until the
@@ -21,6 +22,7 @@ public class SetBuildingListener implements MouseMotionListener {
     public void mouseDragged(MouseEvent e) {
 
     }
+
 
     /**
      * Invoked when the mouse cursor has been moved onto a component

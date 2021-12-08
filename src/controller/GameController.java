@@ -9,7 +9,7 @@ public class GameController {
 
     private BuildingListener buildingListener;
     private BuildBuildingListener buildBuildingListener;
-    private SetBuildingListener setBuildingListener;
+    private placeBuildingListener setBuildingListener;
 
 
     GameController(){

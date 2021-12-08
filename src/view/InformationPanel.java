@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class InformationPanel extends JPanel {
+public class InformationPanel extends JPanel implements InformationViewable{
 
     public static final int INFO_PANEL_WHIDTH = 1152;
     public static final int INFO_PANEL_HEIGHT = 50;
