@@ -1,6 +1,8 @@
 package model;
 
-public class Map {
+import patterns.Observable;
+
+public class Map extends Observable {
     public final int NB_BOX_X = 32;
     public final int NB_BOX_Y = 18;
 

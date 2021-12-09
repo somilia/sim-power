@@ -4,7 +4,7 @@ import view.GameFrame;
 
 public class GameController {
 
-    private GameFrame frame;
+    private GameFrame gameFrame;
     private Map map;
 
     private BuildingListener buildingListener;
@@ -13,7 +13,7 @@ public class GameController {
 
 
     GameController(){
-        frame = new GameFrame(this);
-        map = new Map();
+        this.gameFrame = new GameFrame();
+        this.map = new Map();
     }
 }

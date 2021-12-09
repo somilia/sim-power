@@ -1,10 +1,13 @@
 package view;
 
+import patterns.Observable;
+import patterns.Observer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class InformationPanel extends JPanel implements InformationViewable{
+public class InformationPanel extends JPanel implements Observer {
 
     public static final int INFO_PANEL_WHIDTH = 1152;
     public static final int INFO_PANEL_HEIGHT = 50;
@@ -36,5 +39,10 @@ public class InformationPanel extends JPanel implements InformationViewable{
     @Override
     public Dimension getPreferredSize() {
         return (new Dimension(INFO_PANEL_WHIDTH, INFO_PANEL_HEIGHT));
+    }
+
+    @Override
+    public void update(Observable obs) {
+
     }
 }
