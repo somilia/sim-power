@@ -6,7 +6,8 @@ public class RenewableEnergy extends EnergySources
 {
 	public void genElectricity(){}
 	
-	public RenewableEnergy(){
-		
+	public RenewableEnergy(Box baseBox){
+		super(baseBox);
+		this.type = BuildingType.RENEWABLE;
 	}
 }

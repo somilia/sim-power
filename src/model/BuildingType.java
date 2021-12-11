@@ -1,5 +1,5 @@
 package model;
 
 public enum BuildingType {
-    NUCLEAR, GAS, COAL, WATER, SOLAR, WIND
+    NUCLEAR, GAS, COAL, WATER, SOLAR, WIND, FOSSIL, RENEWABLE
 }

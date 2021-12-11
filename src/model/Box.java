@@ -10,12 +10,40 @@ public class Box
     private boolean coal;
     private boolean uranium;
 
-    private boolean containBuilding;
-    private Building building;
+    private boolean containEnergySource;
+    private boolean containHome;
+
+    private EnergySources energySource;
+    private Home home;
 
 
     public Box(){
-        containBuilding=false;
+        containEnergySource=false;
+        containHome = false;
     }
 
+    public void randomWindGen() {
+    }
+
+    public void randomSunGen() {
+    }
+
+    public void randomWaterGen() {
+    }
+
+    public boolean getContainEnergySource(){
+        return this.containEnergySource;
+    }
+
+    public boolean getContainHome(){
+        return this.containHome;
+    }
+
+    public EnergySources getEnergySource() {
+        return energySource;
+    }
+
+    public Home getHome() {
+        return home;
+    }
 }
