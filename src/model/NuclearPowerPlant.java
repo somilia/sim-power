@@ -1,10 +1,15 @@
 package model;
 
 public class NuclearPowerPlant extends FossilEnergy {
+
+    public static final double MEAN = 180.0;
+
     public NuclearPowerPlant(Box baseBox) {
         super(baseBox);
     }
 
-    public void genElectricity() {
+    @Override
+    public double genElectricity() {
+        return MEAN;
     }
 }

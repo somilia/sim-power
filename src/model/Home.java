@@ -2,8 +2,8 @@ package model;
 
 public abstract class Home extends Building {
 
-    private int nbOfHabitants;
-    private int maxNbOfHabitants;
+    protected int nbOfHabitants;
+    protected int maxNbOfHabitants;
 
     public abstract int genMoney();
 

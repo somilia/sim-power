@@ -2,9 +2,9 @@ package model;
 
 import model.EnergySources;
 
-public class RenewableEnergy extends EnergySources
+public abstract class RenewableEnergy extends EnergySources
 {
-	public void genElectricity(){}
+	public abstract double genElectricity();
 	
 	public RenewableEnergy(Box baseBox){
 		super(baseBox);

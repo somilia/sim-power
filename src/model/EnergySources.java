@@ -1,6 +1,6 @@
 package model;
 
-public class EnergySources extends Building {
+public abstract class EnergySources extends Building {
 
     protected int elecricityProduced;
     protected  Box baseBox;
@@ -10,8 +10,7 @@ public class EnergySources extends Building {
         this.baseBox = baseBox;
     }
 
-    public void genElectricity() {
-    }
+    public abstract double genElectricity();
 
     public int getElecricityProduced() {
         return elecricityProduced;

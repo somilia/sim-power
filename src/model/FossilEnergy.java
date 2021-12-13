@@ -1,6 +1,6 @@
 package model;
 
-public class FossilEnergy extends EnergySources {
+public abstract class FossilEnergy extends EnergySources {
 
     protected int pollutionRate;
 
@@ -9,8 +9,8 @@ public class FossilEnergy extends EnergySources {
         this.type = BuildingType.FOSSIL;
     }
 
-    public void genElectricity() {
-    }
+    public abstract double genElectricity();
+
 
 
 }
