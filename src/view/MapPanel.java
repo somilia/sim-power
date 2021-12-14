@@ -17,7 +17,7 @@ public class MapPanel extends JPanel implements MapViewable{
     public static final int MAP_PANEL_COORD_Y = 50;
 
     private List<BuildingView> buildingViewList;
-    private BoxButton boxButton;
+    //private BoxButton boxButton;
 
 
     MapPanel() {
@@ -26,22 +26,19 @@ public class MapPanel extends JPanel implements MapViewable{
         this.setBorder(new EmptyBorder(20, 20, 20, 20));
         this.setBackground(Color.RED);
         buildingViewList = new ArrayList<BuildingView>();
-        // Bien penser à créer les éléments avant de les placer
-        /*JButton button = new JButton("Test");
-        this.add(button);*/
 
-//        this.boxButton = new BoxButton("Index: " + i);
-
-        GridLayout gridLayout = new GridLayout(4,5, 10, 10);
+        GridLayout gridLayout = new GridLayout(18,32, 10, 10);
         this.setLayout(gridLayout);
-        for (int i = 0; i < 20; i++) {
-            BoxButton b = new BoxButton("Index: " + i);
-            this.add(b);
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < 18; j++) {
+                BoxButton b = new BoxButton("Index: " + i);
+                this.add(b);
+            }
 
         }
-        //this.add(this.boxButton);
+
         this.repaint();
-        //this.setBounds(250,0,250,250);
+
     }
 
     /**
