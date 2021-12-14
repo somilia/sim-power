@@ -21,13 +21,6 @@ public class InformationPanel extends JPanel implements Observer {
     private JLabel pollutionRateLabel;
     private JLabel userMoneyLabel;
 
-    private JLabel populationLabelTitle;
-    private JLabel populationAvailableTitle;
-    private JLabel energyProducedLabelTitle;
-    private JLabel energyPriceLabelTitle;
-    private JLabel pollutionRateLabelTitle;
-    private JLabel userMoneyLabelTitle;
-
     private List<JLabel> labelList;
 
 
@@ -37,13 +30,6 @@ public class InformationPanel extends JPanel implements Observer {
 
         this.setLayout(new FlowLayout());
 
-        populationLabelTitle = new JLabel("Population");
-        populationAvailableTitle = new JLabel("Population available :");
-        energyProducedLabelTitle = new JLabel("Energy produced : ");
-        energyPriceLabelTitle = new JLabel("Energy price : ");
-        pollutionRateLabelTitle = new JLabel("Pollution rate : ");
-        userMoneyLabelTitle = new JLabel("Resources : ");
-
         populationLabel = new JLabel();
         populationAvailableLabel = new JLabel();
         energyProducedLabel = new JLabel();
@@ -51,21 +37,13 @@ public class InformationPanel extends JPanel implements Observer {
         pollutionRateLabel = new JLabel();
         userMoneyLabel = new JLabel();
 
-        this.add(populationLabelTitle);
         this.add(populationLabel);
-        this.add(populationAvailableTitle);
         this.add(populationAvailableLabel);
-        this.add(energyProducedLabelTitle);
         this.add(energyProducedLabel);
-        this.add(energyPriceLabelTitle);
         this.add(energyPriceLabel);
-        this.add(pollutionRateLabelTitle);
         this.add(pollutionRateLabel);
-        this.add(userMoneyLabelTitle);
         this.add(userMoneyLabel);
     }
-
-
 
 
     /**
@@ -93,11 +71,11 @@ public class InformationPanel extends JPanel implements Observer {
      */
     @Override
     public void update(int population, int populationAvailable, int populationMax, double energyProduced, double energyPrice, double pollutionRate, int userMoney) {
-        populationLabel.setText(String.valueOf(population)+"/"+String.valueOf(populationMax));
-        populationAvailableLabel.setText(String.valueOf(populationAvailable));
-        energyProducedLabel.setText(String.valueOf(energyProduced));
-        energyPriceLabel.setText(String.valueOf(energyPrice));
-        pollutionRateLabel.setText(String.valueOf(pollutionRate));//TODO mettre en rouge quand depasse les 75% par exemple
-        userMoneyLabel.setText(String.valueOf(userMoney));
+        populationLabel.setText(String.valueOf("Population : " + population)+"/"+String.valueOf(populationMax));
+        populationAvailableLabel.setText(String.valueOf("Population available : "+populationAvailable));
+        energyProducedLabel.setText(String.format("Energy produced : %.2f" ,energyProduced));
+        energyPriceLabel.setText(String.format("Energy price : %.3f",energyPrice));
+        pollutionRateLabel.setText(String.format("Pollution rate : %.2f",pollutionRate));//TODO mettre en rouge quand depasse les 75% par exemple
+        userMoneyLabel.setText(String.valueOf("Ressources : "+userMoney));
     }
 }
