@@ -1,11 +1,12 @@
 package model;
 
+import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Box
 {
     private static final double MEAN = 0.0;
-    private static final double STANDART_DERIVATION = 0.2;
+    private static final double STANDARD_DERIVATION = 0.2;
 
     private double wind;
     private double sun;
@@ -23,6 +24,10 @@ public class Box
 
 
     public Box(){
+        wind = 2;
+        sun = 2;
+        water = 2;
+
         containEnergySource=false;
         containHome = false;
         //TODO
@@ -33,6 +38,7 @@ public class Box
     public void addBuilding(BuildingType type){
         switch (type){
             case SOLAR :
+                System.out.println("switch solar contain energy is true");
                 this.energySource = new SolarPanel(this);
                 this.containEnergySource = true;
                 break;
@@ -71,18 +77,18 @@ public class Box
 
     public void randomWindGen() {
         Random r = new Random();
-        wind += r.nextGaussian()*STANDART_DERIVATION+MEAN;
+        wind += r.nextGaussian()* STANDARD_DERIVATION +MEAN;
     }
 
     public void randomSunGen() {
         Random r = new Random();
-        sun += r.nextGaussian()*STANDART_DERIVATION+MEAN;
+        sun += r.nextGaussian()* STANDARD_DERIVATION +MEAN;
     }
 
     public void randomWaterGen() {
         if(water!=0){                   //si water = 0 alors il n'y a pas d"eau sur la case donc pas besoin de la faire varier
             Random r = new Random();
-            water += r.nextGaussian()*STANDART_DERIVATION+MEAN;
+            water += r.nextGaussian()* STANDARD_DERIVATION +MEAN;
         }
     }
 

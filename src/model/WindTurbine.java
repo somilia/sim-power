@@ -9,7 +9,7 @@ public class WindTurbine extends RenewableEnergy {
     }
 
     @Override
-    public double genElectricity() {
-        return MEAN* baseBox.getWind();
+    public void genElectricity() {
+        this.elecricityProduced = MEAN* baseBox.getWind();
     }
 }

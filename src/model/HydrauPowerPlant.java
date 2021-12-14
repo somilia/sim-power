@@ -9,7 +9,7 @@ public class HydrauPowerPlant extends RenewableEnergy {
     }
 
     @Override
-    public double genElectricity() {
-        return MEAN* baseBox.getWater();
+    public void genElectricity() {
+        this.elecricityProduced = MEAN* baseBox.getWater();
     }
 }

@@ -28,8 +28,8 @@ public class Map extends Observable implements Runnable{
     private double pollutionRate;///< le taux de pollution correspond à la proportion d'élétricité venant d'energies fossiles
     private int userMoney;
 
-    private int nbOfFossilEnergy;
-    private int nbOfRenewableEnergy;
+    private double nbOfFossilEnergy;
+    private double nbOfRenewableEnergy;
 
     private Box[][] boxList;
 
@@ -45,6 +45,9 @@ public class Map extends Observable implements Runnable{
         pollutionRate = 0.0;
         userMoney = STARTING_AMOUNT;
 
+        nbOfFossilEnergy=0.0;
+        nbOfRenewableEnergy = 0.0;
+
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
         for(int i=0;i<NB_BOX_X;i++){
             for (int j=0;j<NB_BOX_Y;j++){
@@ -52,7 +55,7 @@ public class Map extends Observable implements Runnable{
             }
         }
 
-        this.observerList = new ArrayList<Observer>();
+        this.observerList = new ArrayList<>();
 
     }
 
@@ -113,11 +116,13 @@ public class Map extends Observable implements Runnable{
         else
             this.energyPrice = (population/(energyProduced))%2;
     }
+
     private void updatePollutionRate(){
         if(nbOfFossilEnergy==0 && nbOfRenewableEnergy==0)
             this.pollutionRate = 0.0;
         else
             this.pollutionRate = nbOfFossilEnergy/(nbOfFossilEnergy+nbOfRenewableEnergy);
+        //TODO change into calculate the ration between the enregy produced by fossile and renewable
     }
 
     private void updateUserMoney(){
@@ -138,6 +143,7 @@ public class Map extends Observable implements Runnable{
         for (Box[] array :boxList) {
             for (Box box:array) {
                 if(box.getContainEnergySource()){
+                    box.getEnergySource().genElectricity();
                     sumEnergyProduced+=box.getEnergySource().getElecricityProduced();
                 }
             }
@@ -176,12 +182,14 @@ public class Map extends Observable implements Runnable{
             notifyObservers();
         }
         else if(type==BuildingType.COAL || type==BuildingType.GAS || type==BuildingType.NUCLEAR ){
-            nbOfFossilEnergy++;
+            this.nbOfFossilEnergy++;
+            System.out.println("Build : nb of energy fossil : "+nbOfFossilEnergy);
             updatePollutionRate();
             notifyObservers();
         }
         else if(type== BuildingType.SOLAR || type==BuildingType.WIND || type==BuildingType.WATER){
-            nbOfRenewableEnergy++;
+            this.nbOfRenewableEnergy++;
+            System.out.println("Build : nb of energy renewable : "+nbOfRenewableEnergy);
             updatePollutionRate();
             notifyObservers();
         }
@@ -206,6 +214,7 @@ public class Map extends Observable implements Runnable{
         updateUserMoney();
         updateEnergyProduced();
         updateEnergyPrice();
+        updatePollutionRate();
 
 
     }

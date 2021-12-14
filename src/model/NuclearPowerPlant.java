@@ -9,7 +9,7 @@ public class NuclearPowerPlant extends FossilEnergy {
     }
 
     @Override
-    public double genElectricity() {
-        return MEAN;
+    public void genElectricity() {
+        this.elecricityProduced = MEAN;
     }
 }

@@ -4,7 +4,7 @@ import model.EnergySources;
 
 public abstract class RenewableEnergy extends EnergySources
 {
-	public abstract double genElectricity();
+	public abstract void genElectricity();
 	
 	public RenewableEnergy(Box baseBox){
 		super(baseBox);

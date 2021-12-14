@@ -9,7 +9,7 @@ public abstract class FossilEnergy extends EnergySources {
         this.type = BuildingType.FOSSIL;
     }
 
-    public abstract double genElectricity();
+    public abstract void genElectricity();
 
 
 

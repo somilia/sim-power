@@ -8,8 +8,8 @@ public class SolarPanel extends RenewableEnergy {
     }
 
     @Override
-    public double genElectricity() {
-            return MEAN* baseBox.getSun();
+    public void genElectricity() {
+            this.elecricityProduced = MEAN* baseBox.getSun();
     }
 
 }

@@ -7,6 +7,6 @@ public class House extends Home {
         this.maxNbOfHabitants=5;
     }
     public int genMoney() {
-        return 100;
+        return nbOfHabitants*25;
     }
 }
