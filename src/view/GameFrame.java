@@ -12,17 +12,21 @@ public class GameFrame extends JFrame {
     private MapPanel mapPanel;
     private InformationPanel infoPanel;
 
-
     public GameFrame() {
-
-        //this.gameController = gameController;
-        this.setLayout(new BorderLayout());
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.add(infoPanel, BorderLayout.NORTH);
-        this.add(mapPanel, BorderLayout.SOUTH);
-
+        super();
+        this.setTitle("Simpower");
+        // this.gameController = gameController;
+        this.mapPanel = new MapPanel();
+        this.infoPanel = new InformationPanel();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.pack();
         this.setVisible(true);
         this.setResizable(false);
+        this.setLayout(new BorderLayout());
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        JFrame frame=new JFrame();
+        //this.add(infoPanel, BorderLayout.NORTH);
+        this.add(mapPanel, BorderLayout.SOUTH);
     }
 }
