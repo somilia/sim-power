@@ -18,8 +18,8 @@ public class GameFrame extends JFrame {
         // this.gameController = gameController;
         this.mapPanel = new MapPanel();
         this.infoPanel = new InformationPanel();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.pack();
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
         this.setVisible(true);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
@@ -28,5 +28,6 @@ public class GameFrame extends JFrame {
         JFrame frame=new JFrame();
         //this.add(infoPanel, BorderLayout.NORTH);
         this.add(mapPanel, BorderLayout.SOUTH);
+        this.pack();
     }
 }
