@@ -4,7 +4,6 @@ import model.Box;
 import model.BuildingType;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +30,7 @@ public class MapPanel extends JPanel implements MapViewable{
         this.setLayout(gridLayout);
         for (int i = 0; i < 32; i++) {
             for (int j = 0; j < 18; j++) {
-                BoxButton b = new BoxButton("Index: " + i, i, j);
+                BoxPanel b = new BoxPanel(i, j);
                 this.add(b);
             }
 
