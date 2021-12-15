@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class BuildingListener implements ActionListener {
 
-    BuildingListener(){
+    public BuildingListener(){
 
     }
 

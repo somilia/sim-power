@@ -38,7 +38,7 @@ public class Map extends Observable implements Runnable{
     public Map() {
 
         population = 0;
-        populationAvailable=STARTING_POPULATION_AVAILABLE;
+        populationAvailable = STARTING_POPULATION_AVAILABLE;
         populationMax=0;
         energyProduced = 0.0;
         energyPrice = 0.0;
@@ -122,7 +122,7 @@ public class Map extends Observable implements Runnable{
             this.pollutionRate = 0.0;
         else
             this.pollutionRate = nbOfFossilEnergy/(nbOfFossilEnergy+nbOfRenewableEnergy);
-        //TODO change into calculate the ration between the enregy produced by fossile and renewable
+        //TODO change into calculate the ration between the energy produced by fossil and renewable
     }
 
     private void updateUserMoney(){

@@ -1,8 +1,8 @@
 package controller;
 import model.BuildingType;
 import model.Map;
-import view.GameFrame;
-import view.InformationPanel;
+import patterns.Observer;
+import view.*;
 
 import javax.swing.*;
 
@@ -15,20 +15,45 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class GameController {
 
     private GameFrame gameFrame;
-    private Map map;
+    private MapViewable mapPanel;
+    private Observer informationPanel;
+    private MenuViewable menu;
+
+    private Map model;
 
     private BuildingListener buildingListener;
     private BuildBuildingListener buildBuildingListener;
     private placeBuildingListener setBuildingListener;
 
 
-    //int x=0,y=0;
 
 
-    GameController(){
-        this.gameFrame = new GameFrame();
-        this.map = new Map();
+    int x=0,y=0;
 
+
+
+
+    GameController() {
+
+        model = new Map();
+
+        gameFrame = new GameFrame();
+        mapPanel = new MapPanel();
+        informationPanel = new InformationPanel();
+        menu = new MenuFrame();
+
+
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.SOLAR);
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.WIND);
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.WATER);
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.COAL);
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.GAS);
+        buildBuildingListener = new BuildBuildingListener(this, BuildingType.NUCLEAR);
+
+        buildingListener = new BuildingListener();
+
+
+    }
 
 
         ////////////////////////////////// ne pas faire attention, j'utilise ce qui suit pour debugger mais je l'ai fait sur la branche main comme un con du coup je le met en commentaire pour pas avoir de conflit////////////////
@@ -41,19 +66,19 @@ public class GameController {
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                map.buildBuilding(x++, y++, BuildingType.COAL);
+                model.buildBuilding(x++, y++, BuildingType.COAL);
             }
         });
         btn2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                map.buildBuilding(x++, y++, BuildingType.SOLAR);
+                model.buildBuilding(x++, y++, BuildingType.SOLAR);
             }
         });
         btn3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                map.buildBuilding(x++,y++,BuildingType.HOUSE);
+                model.buildBuilding(x++,y++,BuildingType.HOUSE);
             }
         });
         frame.setLayout(new FlowLayout());
@@ -65,9 +90,42 @@ public class GameController {
         frame.pack();
         frame.setVisible(true);
 
-        map.registerObserver(panel);
-        map.run();*/
+        model.registerObserver(panel);
+        model.run();
 
 
     }
+
+
+
+
+
+    public MapViewable getMapPanel() {
+        return mapPanel;
+    }
+
+    public Observer getInformationPanel() {
+        return informationPanel;
+    }
+
+    public MenuViewable getMenu() {
+        return menu;
+    }
+
+    public Map getModel() {
+        return model;
+    }
+
+    public BuildingListener getBuildingListener() {
+        return buildingListener;
+    }
+
+    public BuildBuildingListener getBuildBuildingListener() {
+        return buildBuildingListener;
+    }
+
+    public placeBuildingListener getSetBuildingListener() {
+        return setBuildingListener;
+    }*/
+
 }

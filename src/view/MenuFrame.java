@@ -14,7 +14,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
     private JButton windBuildBtn;
     private JButton hydrauBuildBtn;
 
-    MenuFrame(){
+    public MenuFrame(){
         this.setDefaultCloseOperation(HIDE_ON_CLOSE );
     }
 

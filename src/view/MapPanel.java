@@ -20,7 +20,7 @@ public class MapPanel extends JPanel implements MapViewable{
     //private BoxButton boxButton;
 
 
-    MapPanel() {
+    public MapPanel() {
         super();
         this.setPreferredSize(new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
         this.setBorder(new EmptyBorder(20, 20, 20, 20));
