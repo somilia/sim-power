@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.Box;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +13,11 @@ public class GameFrame extends JFrame {
     private MapPanel mapPanel;
     private InformationPanel infoPanel;
 
-    public GameFrame() {
+    public GameFrame(Box[][] Boxes) {
         super();
         this.setTitle("Simpower");
         // this.gameController = gameController;
-        this.mapPanel = new MapPanel();
+        this.mapPanel = new MapPanel(Boxes);
         this.infoPanel = new InformationPanel();
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 

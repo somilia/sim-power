@@ -15,7 +15,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class GameController {
 
     private GameFrame gameFrame;
-    private Map map;
+    private Map model;
 
     private BuildingListener buildingListener;
     private BuildBuildingListener buildBuildingListener;
@@ -26,10 +26,9 @@ public class GameController {
 
 
     GameController(){
-        this.gameFrame = new GameFrame();
-        this.map = new Map();
 
-
+        this.model = new Map();
+        this.gameFrame = new GameFrame(model.getBoxList());
 
         ////////////////////////////////// ne pas faire attention, j'utilise ce qui suit pour debugger mais je l'ai fait sur la branche main comme un con du coup je le met en commentaire pour pas avoir de conflit////////////////
 

@@ -19,22 +19,14 @@ public class MapPanel extends JPanel implements MapViewable{
     //private BoxButton boxButton;
 
 
-    MapPanel() {
+    MapPanel(Box[][] Boxes) {
         super();
         this.setPreferredSize(new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
        // this.setBorder(new EmptyBorder(20, 20, 20, 20));
         this.setBackground(Color.GREEN);
         buildingViewList = new ArrayList<BuildingView>();
 
-        GridLayout gridLayout = new GridLayout(18,32, 0, 0);
-        this.setLayout(gridLayout);
-        for (int i = 0; i < 32; i++) {
-            for (int j = 0; j < 18; j++) {
-                BoxPanel b = new BoxPanel(i, j);
-                this.add(b);
-            }
-
-        }
+        initializeMap(Boxes);
 
         this.repaint();
 
@@ -54,7 +46,15 @@ public class MapPanel extends JPanel implements MapViewable{
 
     @Override
     public void initializeMap(Box[][] boxes) {
+        GridLayout gridLayout = new GridLayout(18,32, 0, 0);
+        this.setLayout(gridLayout);
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < 18; j++) {
+                BoxPanel b = new BoxPanel(i, j);
+                this.add(b);
+            }
 
+        }
     }
 
     @Override
