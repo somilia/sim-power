@@ -19,7 +19,6 @@ public class Map extends Observable implements Runnable{
     public static final int STARTING_POPULATION_AVAILABLE = 5;
 
 
-
     private int population;
     private int populationAvailable;
     private int populationMax;
@@ -251,7 +250,7 @@ public class Map extends Observable implements Runnable{
 
 
 
-
+    public Box[][] getBoxList() { return boxList; }
 
     public int getPopulation() {
         return population;

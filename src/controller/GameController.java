@@ -15,7 +15,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 public class GameController {
 
     private GameFrame gameFrame;
-    private MapViewable mapPanel;
+    private MapPanel mapPanel;
     private Observer informationPanel;
     private MenuViewable menu;
 
@@ -25,21 +25,17 @@ public class GameController {
     private BuildBuildingListener buildBuildingListener;
     private placeBuildingListener setBuildingListener;
 
-
-
-
     int x=0,y=0;
-
-
 
 
     GameController() {
 
         model = new Map();
 
-        gameFrame = new GameFrame();
-        mapPanel = new MapPanel();
         informationPanel = new InformationPanel();
+        mapPanel = new MapPanel(model.getBoxList());
+        gameFrame = new GameFrame(mapPanel);
+
         menu = new MenuFrame();
 
 
@@ -51,10 +47,7 @@ public class GameController {
         buildBuildingListener = new BuildBuildingListener(this, BuildingType.NUCLEAR);
 
         buildingListener = new BuildingListener();
-
-
     }
-
 
         ////////////////////////////////// ne pas faire attention, j'utilise ce qui suit pour debugger mais je l'ai fait sur la branche main comme un con du coup je le met en commentaire pour pas avoir de conflit////////////////
 
@@ -94,7 +87,7 @@ public class GameController {
         model.run();
 
 
-    }
+    }*/
 
 
 
@@ -126,6 +119,6 @@ public class GameController {
 
     public placeBuildingListener getSetBuildingListener() {
         return setBuildingListener;
-    }*/
+    }
 
 }
