@@ -160,7 +160,7 @@ public class Map extends Observable implements Runnable{
 
         boolean isEmpty = false;
         try{
-            isEmpty = boxList[posX][posY].getContainHome() || boxList[posX][posY].getContainEnergySource();
+            isEmpty = !boxList[posX][posY].getContainHome() || !boxList[posX][posY].getContainEnergySource();
         } catch (Exception e) {
             e.printStackTrace();
         }

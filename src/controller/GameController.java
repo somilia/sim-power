@@ -1,31 +1,32 @@
 package controller;
 import model.BuildingType;
 import model.Map;
-import patterns.Observer;
 import view.*;
 
 import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class GameController {
 
     private GameFrame gameFrame;
     private MapPanel mapPanel;
-    private Observer informationPanel;
+    private InformationPanel informationPanel;
     private MenuViewable menu;
 
     private Map model;
 
     private BuildingListener buildingListener;
-    private BuildBuildingListener buildBuildingListener;
-    private placeBuildingListener setBuildingListener;
+
+    private BuildBuildingListener buildSolarPanel;
+    private BuildBuildingListener buildWindTurbine;
+    private BuildBuildingListener buildHydrauPowerPlant;
+    private BuildBuildingListener buildCoalPowerPlant;
+    private BuildBuildingListener buildGasPowerPlant;
+    private BuildBuildingListener buildNuclearPowerPlant;
+
+    private PlaceBuildingListener placeBuildingListener;
 
     int x=0,y=0;
+
 
 
     GameController() {
@@ -34,19 +35,36 @@ public class GameController {
 
         informationPanel = new InformationPanel();
         mapPanel = new MapPanel(model.getBoxList());
-        gameFrame = new GameFrame(mapPanel);
-
+        gameFrame = new GameFrame(mapPanel, informationPanel);
         menu = new MenuFrame();
 
-
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.SOLAR);
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.WIND);
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.WATER);
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.COAL);
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.GAS);
-        buildBuildingListener = new BuildBuildingListener(this, BuildingType.NUCLEAR);
-
+        buildSolarPanel = new BuildBuildingListener(this, BuildingType.SOLAR);
+        buildWindTurbine = new BuildBuildingListener(this, BuildingType.WIND);
+        buildHydrauPowerPlant = new BuildBuildingListener(this, BuildingType.WATER);
+        buildCoalPowerPlant = new BuildBuildingListener(this, BuildingType.COAL);
+        buildGasPowerPlant = new BuildBuildingListener(this, BuildingType.GAS);
+        buildNuclearPowerPlant = new BuildBuildingListener(this, BuildingType.NUCLEAR);
+        placeBuildingListener = new PlaceBuildingListener(this);
         buildingListener = new BuildingListener();
+
+        mapPanel.addMouseListener(this.placeBuildingListener);
+        mapPanel.addMouseMotionListener(this.placeBuildingListener);
+
+        ///////////////////////////////////////////////////Debugging
+        JButton btn = new JButton("fossil");
+        JButton btn2 = new JButton("renewable");
+        JButton btn3 = new JButton("house");
+
+        btn.addActionListener(buildCoalPowerPlant);
+        btn2.addActionListener(buildSolarPanel);
+
+        informationPanel.add(btn);
+        informationPanel.add(btn2);
+        /////////////////////////////////////////////////////
+
+        model.registerObserver(informationPanel);
+        model.run();
+
     }
 
         ////////////////////////////////// ne pas faire attention, j'utilise ce qui suit pour debugger mais je l'ai fait sur la branche main comme un con du coup je le met en commentaire pour pas avoir de conflit////////////////
@@ -93,11 +111,11 @@ public class GameController {
 
 
 
-    public MapViewable getMapPanel() {
+    public MapPanel getMapPanel() {
         return mapPanel;
     }
 
-    public Observer getInformationPanel() {
+    public InformationPanel getInformationPanel() {
         return informationPanel;
     }
 
@@ -113,12 +131,32 @@ public class GameController {
         return buildingListener;
     }
 
-    public BuildBuildingListener getBuildBuildingListener() {
-        return buildBuildingListener;
+    public BuildBuildingListener getBuildSolarPanel() {
+        return buildSolarPanel;
     }
 
-    public placeBuildingListener getSetBuildingListener() {
-        return setBuildingListener;
+    public BuildBuildingListener getBuildWindTurbine() {
+        return buildWindTurbine;
+    }
+
+    public BuildBuildingListener getBuildHydrauPowerPlant() {
+        return buildHydrauPowerPlant;
+    }
+
+    public BuildBuildingListener getBuildCoalPowerPlant() {
+        return buildCoalPowerPlant;
+    }
+
+    public BuildBuildingListener getBuildGasPowerPlant() {
+        return buildGasPowerPlant;
+    }
+
+    public BuildBuildingListener getBuildNuclearPowerPlant() {
+        return buildNuclearPowerPlant;
+    }
+
+    public PlaceBuildingListener getPlaceBuildingListener() {
+        return placeBuildingListener;
     }
 
 }

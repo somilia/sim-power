@@ -6,5 +6,5 @@ import model.BuildingType;
 public interface MapViewable {
 
     public void initializeMap(Box[][] boxes);
-    public void addBuilding(BuildingType buildingType, int positionX, int positionY);
+    public void addBuilding(BuildingView buildingView, int positionX, int positionY);
 }

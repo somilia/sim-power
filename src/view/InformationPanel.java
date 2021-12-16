@@ -9,7 +9,7 @@ import java.util.List;
 
 public class InformationPanel extends JPanel implements Observer {
 
-    public static final int INFO_PANEL_WHIDTH = 1152;
+    public static final int INFO_PANEL_WHIDTH = 1024;
     public static final int INFO_PANEL_HEIGHT = 50;
     public static final int INFO_PANEL_COORD_X = 0;
     public static final int INFO_PANEL_COORD_Y = 0;

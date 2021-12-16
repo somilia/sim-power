@@ -2,6 +2,7 @@ package controller;
 
 import model.BuildingType;
 import model.Map;
+import view.BuildingView;
 import view.GameFrame;
 
 import java.awt.event.ActionEvent;
@@ -27,14 +28,15 @@ public class BuildBuildingListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if(gameController.getModel().hasEnoughMoney(buildingType)) {
-            //gameController.getMapPanel().instantiateBuilding(this.buildingType);
 
-            /*public void instantiateBuilding(BuildingType buildingType){
+            BuildingView tempBuildingView = new BuildingView(buildingType);
+            gameController.getMapPanel().add(tempBuildingView);
+            gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);
 
-                this.
-            }*/
+            System.out.println("has enough money");
         }
         else{
+            gameController.getMenu().printErrorMessage("Not enough money");
         }
     }
 }

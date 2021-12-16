@@ -15,21 +15,23 @@ public class MapPanel extends JPanel implements MapViewable{
     public static final int MAP_PANEL_COORD_X = 0;
     public static final int MAP_PANEL_COORD_Y = 50;
 
-    private List<BuildingView> buildingViewList;
-    //private BoxButton boxButton;
 
 
-    public MapPanel(Box[][] Boxes) {
+    private BoxPanel[][] boxPanelsList;
+
+
+    public MapPanel(Box[][] boxes) {
 
         super();
-        this.setPreferredSize(new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
+        //this.setPreferredSize(new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
        // this.setBorder(new EmptyBorder(20, 20, 20, 20));
         this.setBackground(Color.GREEN);
-        buildingViewList = new ArrayList<BuildingView>();
 
-        initializeMap(Boxes);
+        boxPanelsList = new BoxPanel[32][18];
+        initializeMap(boxes);
 
-        this.repaint();
+
+        //this.repaint();
 
     }
 
@@ -45,22 +47,24 @@ public class MapPanel extends JPanel implements MapViewable{
 
 
 
-    @Override
+    @Override//TODO comprendre -> ordre des deux boucles imbriqués inversées à cause de l'odre de remplissage du GridLayout
     public void initializeMap(Box[][] boxes) {
         GridLayout gridLayout = new GridLayout(18,32, 0, 0);
         this.setLayout(gridLayout);
-        for (int i = 0; i < 32; i++) {
-            for (int j = 0; j < 18; j++) {
-                BoxPanel b = new BoxPanel(i, j);
-                this.add(b);
+        for (int j = 0; j < 18; j++) {
+            for (int i = 0; i < 32; i++) {
+                boxPanelsList[i][j] = new BoxPanel(i, j);
+                this.add(boxPanelsList[i][j]);
             }
 
         }
     }
 
     @Override
-    public void addBuilding(BuildingType buildingType, int positionX, int positionY) {
-
+    public void addBuilding(BuildingView buildingView, int positionX, int positionY) {
+        System.out.println("MapPanel : addBuilding : "+ positionX+" "+positionY);
+        this.remove(buildingView);
+        this.boxPanelsList[positionX][positionY].add(buildingView);
     }
 
 }

@@ -1,7 +1,33 @@
 Mécanique de jeu :
 
+   Le jeu évolue sur une map qui est divisée en un certain nombre de cases. Cette map possède des caractéristiques dynamiques
+   qui sont le soleil, le vent et l'eau. Pour cela chaque case de la map a des attributs modélisant la valeur du soleil, du vent et de l'eau.
+   Nous avons définis des zones de cases qui sont plus propices à des fortes valeurs de soleil ou de vent.
+   Ces caractéristiques dynamiques varient aléatoirement au cours du temps.
+   La map possède aussi des ressources statiques (pour l'instant). Celles-ci sont le charbon, le gaz et l'uranium.
+   Chaque case possède donc ou non une ou plusieurs de ces ressources.
+
+   Il est possible de produire de l'énergie grâce à ces 6 différents types de ressources.
+   Il existe un bâtiment différent pour produire de l'énergie à partir de chacune de ces ressources.
+   
+   L'exploitation des ressources fossiles pollue la map. Il y a donc un indicateur de taux de pollution
+   qui correspond à la proportion d'énergie produite à partir de ressources fossiles par rapport à la quantité totale d'énergie produite.
+
+   Il est possible de construire des foyer (maison ou appartement) pouvant acceuillir des habitants. 
+   Ces habitants payent des taxes qui donne au joueur de l'argent pour acheter les bâtiments qu'il souhaite.
+
+   Le nombre d'habitants voulant habiter dans la ville évolue en fonction du taux de pollution de la map et du prix de l'éléctricité.
+   
+   Le prix de l'éléctrictité est calculé avec le ratio entre le nombre d'habitant (la population) et la quantité d'énergie produite.
+
+   La production d'énergie renouvelable varie donc en fonction du temps et peut chuter à certains moments. 
+   Cela a pour effet d'augmenter le prix de l'éléctricité et donc d'empêcher de nouveaux habitants de vouloir venir et donc de ralentir la récolte d'argent. 
+   Il faut donc équilibrer le nombre de d'énergie renouvelables et fossiles. 
+   Mais attention ! Il faut faire attention de ne pas trop faire augmenter le taux de pollution sinon personne ne voudra habiter dans votre ville non plus.
+   Le but est donc de trouver un équilibre pour continuer d'évoluer le plus rapidement possible.
+
    On a une ville qu'il faut fournir en éléctricité. Pour cela il faut construire des sources d'énergie. 
-   Les sources d'énergie peuvent + ou - polluer selon leur type.
+   Il y a deux types de sources d'énergie disponible : des sources d'énergie renou.
    Il est possible d'acheter et de construire des habitations pour pouvoir accueillir les potentiels habitants qui viendraient
    Le nombre d'habitants augmente lorsque le prix de l'élécricité est faible et que le niveau de pollution est faible aussi.
    Plus le nombre d'habitants augmente, plus on gagne d'argent, plus on peut construire des nouvelles sources d'énergies...
