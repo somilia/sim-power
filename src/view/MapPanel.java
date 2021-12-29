@@ -53,7 +53,7 @@ public class MapPanel extends JPanel implements MapViewable{
         this.setLayout(gridLayout);
         for (int j = 0; j < 18; j++) {
             for (int i = 0; i < 32; i++) {
-                boxPanelsList[i][j] = new BoxPanel(i, j);
+                boxPanelsList[i][j] = new BoxPanel(boxes, i, j);
                 this.add(boxPanelsList[i][j]);
             }
 
