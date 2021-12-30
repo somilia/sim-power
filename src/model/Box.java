@@ -33,7 +33,14 @@ public class Box
         //TODO
     }
 
-    public Box(double wind, double sun, double water, boolean gas, boolean coal, boolean uranium){}
+    public Box(double _wind, double _sun, double _water, boolean _gas, boolean _coal, boolean _uranium){
+        wind = _wind;
+        sun = _sun;
+        water = _water;
+        gas = _gas;
+        coal = _coal;
+        uranium = _uranium;
+    }
 
     public void addBuilding(BuildingType type){
         switch (type){
@@ -86,9 +93,9 @@ public class Box
     }
 
     public void randomWaterGen() {
-        if(water!=0){                   //si water = 0 alors il n'y a pas d"eau sur la case donc pas besoin de la faire varier
+        if (water != 0) {                   //si water = 0 alors il n'y a pas d"eau sur la case donc pas besoin de la faire varier
             Random r = new Random();
-            water += r.nextGaussian()* STANDARD_DERIVATION +MEAN;
+            water += r.nextGaussian() * STANDARD_DERIVATION + MEAN;
         }
     }
 

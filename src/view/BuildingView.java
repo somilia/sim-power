@@ -14,7 +14,7 @@ public class BuildingView extends JButton {
 
     public BuildingView(BuildingType type){
 
-        this.setBackground(Color.RED);
+       // this.setBackground(Color.RED);
         this.setVisible(true);
 
         Icon icon;
