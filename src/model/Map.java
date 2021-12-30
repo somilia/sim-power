@@ -60,7 +60,7 @@ public class Map extends Observable implements Runnable{
         int y_coal = yr_coal.nextInt(16- 2 + 1) + 2;
 
         Random xr_uranium = new Random();
-        int x_uranium = xr_uranium.nextInt(32 - 20 + 1) + 20;
+        int x_uranium = xr_uranium.nextInt(30 - 20 + 1) + 20;
         Random yr_uranium = new Random();
         int y_uranium = yr_uranium.nextInt(16- 2 + 1) + 2;
 
