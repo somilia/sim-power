@@ -68,6 +68,7 @@ public class PlaceBuildingListener implements MouseMotionListener, MouseListener
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("mouse clicked out of if");
+        //TODO if Buildingtype == SOLAR || ... || (buildingType == coal && box[x][y].getCOntainCoal) || .....
         if(boxIsAvailable){
             System.out.println("mouse clicked"+(e.getX()/(MapPanel.MAP_PANEL_WIDTH/Map.NB_BOX_X))+" "+(e.getY()/(MapPanel.MAP_PANEL_HEIGHT/Map.NB_BOX_Y)));
             isPlacingBuilding=false;

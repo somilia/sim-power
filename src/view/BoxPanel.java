@@ -13,6 +13,7 @@ public class BoxPanel extends JPanel{
     int positionY;
 
     BufferedImage image;
+    BuildingView buildingView;
 
     BoxPanel(int x, int y) {
        // super(s);

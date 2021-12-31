@@ -30,7 +30,7 @@ public class BuildBuildingListener implements ActionListener {
         if(gameController.getModel().hasEnoughMoney(buildingType)) {
 
             BuildingView tempBuildingView = new BuildingView(buildingType);
-            gameController.getMapPanel().add(tempBuildingView);
+            gameController.getMapPanel().add(tempBuildingView);A
             gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);
 
             System.out.println("has enough money");

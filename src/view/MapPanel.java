@@ -56,7 +56,6 @@ public class MapPanel extends JPanel implements MapViewable{
                 boxPanelsList[i][j] = new BoxPanel(i, j);
                 this.add(boxPanelsList[i][j]);
             }
-
         }
     }
 
