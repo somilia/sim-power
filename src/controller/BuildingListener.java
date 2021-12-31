@@ -5,18 +5,15 @@ import java.awt.event.ActionListener;
 
 public class BuildingListener implements ActionListener {
 
-    public BuildingListener(){
+    private GameController gameController;
 
+    public BuildingListener(GameController gameController){
+        this.gameController = gameController;
     }
 
 
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        gameController.getPlaceBuildingListener().mouseClicked();
     }
 }

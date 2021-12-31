@@ -38,16 +38,15 @@ public class GameController {
         gameFrame = new GameFrame(mapPanel, informationPanel);
         menu = new MenuFrame();
 
-        buildSolarPanel = new BuildBuildingListener(this, BuildingType.SOLAR);
-        buildWindTurbine = new BuildBuildingListener(this, BuildingType.WIND);
-        buildHydrauPowerPlant = new BuildBuildingListener(this, BuildingType.WATER);
-        buildCoalPowerPlant = new BuildBuildingListener(this, BuildingType.COAL);
-        buildGasPowerPlant = new BuildBuildingListener(this, BuildingType.GAS);
-        buildNuclearPowerPlant = new BuildBuildingListener(this, BuildingType.NUCLEAR);
+        buildingListener = new BuildingListener(this);
+        buildSolarPanel = new BuildBuildingListener(this, buildingListener, BuildingType.SOLAR);
+        buildWindTurbine = new BuildBuildingListener(this, buildingListener, BuildingType.WIND);
+        buildHydrauPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.WATER);
+        buildCoalPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.COAL);
+        buildGasPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.GAS);
+        buildNuclearPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.NUCLEAR);
         placeBuildingListener = new PlaceBuildingListener(this);
-        buildingListener = new BuildingListener();
 
-        mapPanel.addMouseListener(this.placeBuildingListener);
         mapPanel.addMouseMotionListener(this.placeBuildingListener);
 
         ///////////////////////////////////////////////////Debugging

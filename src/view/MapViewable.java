@@ -7,4 +7,5 @@ public interface MapViewable {
 
     public void initializeMap(Box[][] boxes);
     public void addBuilding(BuildingView buildingView, int positionX, int positionY);
+    public void removeBuilding(BuildingView buildingView, int positionX, int positionY);
 }

@@ -3,10 +3,7 @@ package model;
 import patterns.Observable;
 import patterns.Observer;
 
-import javax.xml.transform.stream.StreamSource;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Map extends Observable implements Runnable{
@@ -257,17 +254,7 @@ public class Map extends Observable implements Runnable{
 
 
 
-    /**
-     * When an object implementing interface {@code Runnable} is used
-     * to create a thread, starting the thread causes the object's
-     * {@code run} method to be called in that separately executing
-     * thread.
-     * <p>
-     * The general contract of the method {@code run} is that it may
-     * take any action whatsoever.
-     *
-     * @see Thread#run()
-     */
+
     @Override
     public void run() {
 
@@ -286,6 +273,16 @@ public class Map extends Observable implements Runnable{
     }
 
 
+    public boolean canBuildOnBox(int positionX, int positionY, BuildingType buildingType){
+
+        return switch (buildingType) {
+            case SOLAR, WIND, WATER -> boxIsEmpty(positionX, positionY);
+            case COAL -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasCoal();
+            case GAS -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasGas();
+            case NUCLEAR -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasUranium();
+            default -> throw new IllegalArgumentException("BuildingType not found");
+        };
+    }
 
     public Box[][] getBoxList() { return boxList; }
 

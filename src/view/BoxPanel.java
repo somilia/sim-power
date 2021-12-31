@@ -21,19 +21,19 @@ public class BoxPanel extends JPanel{
         URL resource;
 
         if (boxes[x][y].getWater()!=0) {resource = getClass().getResource("/res/img/water.png");}
-        else if (boxes[x][y].isCoal()==true && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/coal.png");}
-        else if (boxes[x][y].isGas()==true && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/gas.png");}
-        else if (boxes[x][y].isUranium()==true && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/uranium.png");}
+        else if (boxes[x][y].hasCoal() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/coal.png");}
+        else if (boxes[x][y].hasGas() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/gas.png");}
+        else if (boxes[x][y].hasUranium() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/uranium.png");}
 
-        else if (boxes[x][y].getWind()>15 && boxes[x][y].isCoal()==false && boxes[x][y].isGas()==false && boxes[x][y].isUranium()==false) {resource = getClass().getResource("/res/img/wind.png");}
-        else if (boxes[x][y].getWind()>15 && boxes[x][y].isCoal()==true) {resource = getClass().getResource("/res/img/coal_wind.png");}
-        else if (boxes[x][y].getWind()>15 && boxes[x][y].isGas()==true) {resource = getClass().getResource("/res/img/gas_wind.png");}
-        else if (boxes[x][y].getWind()>15 && boxes[x][y].isUranium()==true) {resource = getClass().getResource("/res/img/uranium_wind.png");}
+        else if (boxes[x][y].getWind()>15 && !boxes[x][y].hasCoal() && !boxes[x][y].hasGas() && !boxes[x][y].hasUranium()) {resource = getClass().getResource("/res/img/wind.png");}
+        else if (boxes[x][y].getWind()>15 && boxes[x][y].hasCoal()) {resource = getClass().getResource("/res/img/coal_wind.png");}
+        else if (boxes[x][y].getWind()>15 && boxes[x][y].hasGas()) {resource = getClass().getResource("/res/img/gas_wind.png");}
+        else if (boxes[x][y].getWind()>15 && boxes[x][y].hasUranium()) {resource = getClass().getResource("/res/img/uranium_wind.png");}
 
-        else if (boxes[x][y].getSun()>15 && boxes[x][y].isCoal()==false && boxes[x][y].isGas()==false && boxes[x][y].isUranium()==false) {resource = getClass().getResource("/res/img/sun.png");}
-        else if (boxes[x][y].getSun()>15 && boxes[x][y].isCoal()==true) {resource = getClass().getResource("/res/img/coal_sun.png");}
-        else if (boxes[x][y].getSun()>15 && boxes[x][y].isGas()==true) {resource = getClass().getResource("/res/img/gas_sun.png");}
-        else if (boxes[x][y].getSun()>15 && boxes[x][y].isUranium()==true) {resource = getClass().getResource("/res/img/uranium_sun.png");}
+        else if (boxes[x][y].getSun()>15 && !boxes[x][y].hasCoal() && !boxes[x][y].hasGas() && !boxes[x][y].hasUranium()) {resource = getClass().getResource("/res/img/sun.png");}
+        else if (boxes[x][y].getSun()>15 && boxes[x][y].hasCoal()) {resource = getClass().getResource("/res/img/coal_sun.png");}
+        else if (boxes[x][y].getSun()>15 && boxes[x][y].hasGas()) {resource = getClass().getResource("/res/img/gas_sun.png");}
+        else if (boxes[x][y].getSun()>15 && boxes[x][y].hasUranium()) {resource = getClass().getResource("/res/img/uranium_sun.png");}
         else{resource = getClass().getResource("/res/img/grass.png");}
 
         try {
@@ -42,7 +42,7 @@ public class BoxPanel extends JPanel{
             e.printStackTrace();
         }
 
-
+        this.setLayout(new BorderLayout());
         this.positionX = x;
         this.positionY = y;
 

@@ -10,30 +10,31 @@ import java.awt.event.ActionListener;
 
 public class BuildBuildingListener implements ActionListener {
 
+    public static int INITIAL_POSITION_X = 16;
+    public static int INITIAL_POSITION_Y = 8;
+
     GameController gameController;
+    BuildingListener buildingListener;
     BuildingType buildingType;
 
-    BuildBuildingListener(GameController gameController, BuildingType buildingType){
+    BuildBuildingListener(GameController gameController, BuildingListener buildingListener, BuildingType buildingType){
         this.gameController = gameController;
+        this.buildingListener = buildingListener;
         this.buildingType = buildingType;
     }
 
 
-    /**
-     * Invoked when an action occurs.
-     *
-     * @param e the event to be processed
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if(gameController.getModel().hasEnoughMoney(buildingType)) {
 
             BuildingView tempBuildingView = new BuildingView(buildingType);
-            gameController.getMapPanel().add(tempBuildingView);A
-            gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);
+            tempBuildingView.addActionListener(buildingListener);
 
-            System.out.println("has enough money");
+            gameController.getMapPanel().addBuilding(tempBuildingView, INITIAL_POSITION_X, INITIAL_POSITION_Y);
+            gameController.getMapPanel().repaint();
+            gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);
         }
         else{
             gameController.getMenu().printErrorMessage("Not enough money");

@@ -127,15 +127,15 @@ public class Box
         return water;
     }
 
-    public boolean isGas() {
+    public boolean hasGas() {
         return gas;
     }
 
-    public boolean isCoal() {
+    public boolean hasCoal() {
         return coal;
     }
 
-    public boolean isUranium() {
+    public boolean hasUranium() {
         return uranium;
     }
 }

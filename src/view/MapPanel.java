@@ -61,10 +61,18 @@ public class MapPanel extends JPanel implements MapViewable{
 
     @Override
     public void addBuilding(BuildingView buildingView, int positionX, int positionY) {
-        System.out.println("MapPanel : addBuilding : "+ positionX+" "+positionY);
-        this.remove(buildingView);
+        //System.out.println("MapPanel : addBuilding : "+ positionX+" "+positionY);
+        //this.remove(buildingView);
         this.boxPanelsList[positionX][positionY].add(buildingView);
+        this.boxPanelsList[positionX][positionY].repaint();
     }
+
+    @Override
+    public void removeBuilding(BuildingView buildingView, int positionX, int positionY) {
+        this.boxPanelsList[positionX][positionY].remove(buildingView);
+        this.boxPanelsList[positionX][positionY].repaint();
+    }
+
 
 }
 
