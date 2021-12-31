@@ -7,6 +7,7 @@ import javax.xml.transform.stream.StreamSource;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Map extends Observable implements Runnable{
 
@@ -48,16 +49,52 @@ public class Map extends Observable implements Runnable{
         nbOfRenewableEnergy = 0.0;
 
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
+        Random xr_gas = new Random();
+        int x_gas = xr_gas.nextInt(9 - 2 + 1) + 2;   //r.nextInt((max - min) + 1) + min;
+        Random yr_gas = new Random();
+        int y_gas = yr_gas.nextInt(16- 2 + 1) + 2;
+
+        Random xr_coal = new Random();
+        int x_coal = xr_coal.nextInt(19 - 10 + 1) + 10;
+        Random yr_coal = new Random();
+        int y_coal = yr_coal.nextInt(16- 2 + 1) + 2;
+
+        Random xr_uranium = new Random();
+        int x_uranium = xr_uranium.nextInt(30 - 20 + 1) + 20;
+        Random yr_uranium = new Random();
+        int y_uranium = yr_uranium.nextInt(16- 2 + 1) + 2;
+
+
         for(int i=0;i<NB_BOX_X;i++){
-            for (int j=0;j<NB_BOX_Y;j++){
-                boxList[i][j] = new Box();
+            for(int j=0;j<NB_BOX_Y;j++){
+                boxList[i][j] = new Box(NB_BOX_Y-j, 1+j, 0, randomFossilGen(i,j,x_gas,y_gas), randomFossilGen(i,j,x_coal,y_coal), randomFossilGen(i,j,x_uranium,y_uranium)); //public Box(double wind, double sun, double water, boolean gas, boolean coal, boolean uranium){}
+
+
             }
         }
 
         this.observerList = new ArrayList<>();
 
     }
+    public boolean randomFossilGen(int i, int j, int x, int y) {
+        if(((i+2==x)||(i-2==x) || (i+1==x)||(i-1==x) || (i==x)) && ((j+2==y)||(j-2==y) || (j+1==y)||(j-1==y) || (j==y)) && !(((i+2==x)&&(j+2==y)||(i-2==x)&&(j-2==y)||(i+2==x)&&(j-2==y)||(i-2==x)&&(j+2==y)))){
+            return true;
+        }else {return false;}
+    }
+/*
+    public void randomFossilGen() {
+        Random x = new Random();
+        Random y = new Random();
+        for(int i=0;i<NB_BOX_X;i++){
+            for (int j=0;j<NB_BOX_Y;j++){
+                boxList[i][j] = new Box(j, NB_BOX_Y-j, 1, true, true, true); //public Box(double wind, double sun, double water, boolean gas, boolean coal, boolean uranium){}
 
+
+            }
+        }
+        sun += r.nextGaussian()* STANDARD_DERIVATION +MEAN;
+    }
+*/
     @Override
     public void notifyObservers() {
         for (Observer obs: observerList) {
