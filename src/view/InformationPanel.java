@@ -1,5 +1,6 @@
 package view;
 
+import controller.OpenMenuListener;
 import patterns.Observable;
 import patterns.Observer;
 
@@ -21,12 +22,9 @@ public class InformationPanel extends JPanel implements Observer {
     private JLabel pollutionRateLabel;
     private JLabel userMoneyLabel;
 
-    private List<JLabel> labelList;
+    private JButton menuBtn;
 
-
-
-
-    public InformationPanel(){
+    public InformationPanel(OpenMenuListener openMenuListener){
 
         this.setLayout(new FlowLayout());
 
@@ -36,6 +34,8 @@ public class InformationPanel extends JPanel implements Observer {
         energyPriceLabel = new JLabel();
         pollutionRateLabel = new JLabel();
         userMoneyLabel = new JLabel();
+        menuBtn = new JButton("Menu");
+        menuBtn.addActionListener(openMenuListener);
 
         this.add(populationLabel);
         this.add(populationAvailableLabel);
@@ -43,6 +43,7 @@ public class InformationPanel extends JPanel implements Observer {
         this.add(energyPriceLabel);
         this.add(pollutionRateLabel);
         this.add(userMoneyLabel);
+        this.add(menuBtn);
     }
 
 

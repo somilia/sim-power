@@ -1,10 +1,10 @@
 package model;
 
-public class HydrauPowerPlant extends RenewableEnergy {
+public class HydroPowerPlant extends RenewableEnergy {
 
     private static final double MEAN = 140.0;
 
-    public HydrauPowerPlant(Box baseBox) {
+    public HydroPowerPlant(Box baseBox) {
         super(baseBox);
     }
 

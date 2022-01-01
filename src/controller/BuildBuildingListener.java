@@ -35,6 +35,7 @@ public class BuildBuildingListener implements ActionListener {
             gameController.getMapPanel().addBuilding(tempBuildingView, INITIAL_POSITION_X, INITIAL_POSITION_Y);
             gameController.getMapPanel().repaint();
             gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);
+            gameController.getMenu().setVisible(false);
         }
         else{
             gameController.getMenu().printErrorMessage("Not enough money");

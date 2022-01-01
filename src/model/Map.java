@@ -208,26 +208,20 @@ public class Map extends Observable implements Runnable{
 
         if(type == BuildingType.HOUSE || type==BuildingType.APPARTEMENT){
             populationMax += boxList[posX][posY].getHome().getMaxNbOfHabitants();
-            System.out.println("populationMax "+populationMax);
             updatePopulation();
-            System.out.println("population" +population);
             updateEnergyPrice();
             notifyObservers();
         }
         else if(type==BuildingType.COAL || type==BuildingType.GAS || type==BuildingType.NUCLEAR ){
             this.nbOfFossilEnergy++;
-            System.out.println("Build : nb of energy fossil : "+nbOfFossilEnergy);
             updatePollutionRate();
             notifyObservers();
         }
         else if(type== BuildingType.SOLAR || type==BuildingType.WIND || type==BuildingType.WATER){
             this.nbOfRenewableEnergy++;
-            System.out.println("Build : nb of energy renewable : "+nbOfRenewableEnergy);
             updatePollutionRate();
             notifyObservers();
         }
-
-        System.out.println("builbuilding");
     }
 
     public void updateBoxData() {
@@ -276,7 +270,7 @@ public class Map extends Observable implements Runnable{
     public boolean canBuildOnBox(int positionX, int positionY, BuildingType buildingType){
 
         return switch (buildingType) {
-            case SOLAR, WIND, WATER -> boxIsEmpty(positionX, positionY);
+            case SOLAR, WIND, WATER,HOUSE,APPARTEMENT -> boxIsEmpty(positionX, positionY);
             case COAL -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasCoal();
             case GAS -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasGas();
             case NUCLEAR -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasUranium();

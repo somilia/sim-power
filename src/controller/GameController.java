@@ -14,16 +14,17 @@ public class GameController {
 
     private Map model;
 
+    private PlaceBuildingListener placeBuildingListener;
     private BuildingListener buildingListener;
-
+    private OpenMenuListener openMenuListener;
     private BuildBuildingListener buildSolarPanel;
     private BuildBuildingListener buildWindTurbine;
-    private BuildBuildingListener buildHydrauPowerPlant;
+    private BuildBuildingListener buildHydroPowerPlant;
     private BuildBuildingListener buildCoalPowerPlant;
     private BuildBuildingListener buildGasPowerPlant;
     private BuildBuildingListener buildNuclearPowerPlant;
-
-    private PlaceBuildingListener placeBuildingListener;
+    private BuildBuildingListener buildHouse;
+    private BuildBuildingListener buildAppartement;
 
     int x=0,y=0;
 
@@ -33,33 +34,25 @@ public class GameController {
 
         model = new Map();
 
-        informationPanel = new InformationPanel();
-        mapPanel = new MapPanel(model.getBoxList());
-        gameFrame = new GameFrame(mapPanel, informationPanel);
-        menu = new MenuFrame();
-
+        placeBuildingListener = new PlaceBuildingListener(this);
         buildingListener = new BuildingListener(this);
         buildSolarPanel = new BuildBuildingListener(this, buildingListener, BuildingType.SOLAR);
         buildWindTurbine = new BuildBuildingListener(this, buildingListener, BuildingType.WIND);
-        buildHydrauPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.WATER);
+        buildHydroPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.WATER);
         buildCoalPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.COAL);
         buildGasPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.GAS);
         buildNuclearPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.NUCLEAR);
-        placeBuildingListener = new PlaceBuildingListener(this);
+        buildHouse = new BuildBuildingListener(this, buildingListener, BuildingType.HOUSE);
+        buildAppartement = new BuildBuildingListener(this, buildingListener, BuildingType.APPARTEMENT);
 
-        mapPanel.addMouseMotionListener(this.placeBuildingListener);
 
-        ///////////////////////////////////////////////////Debugging
-        JButton btn = new JButton("fossil");
-        JButton btn2 = new JButton("renewable");
-        JButton btn3 = new JButton("house");
 
-        btn.addActionListener(buildCoalPowerPlant);
-        btn2.addActionListener(buildSolarPanel);
-
-        informationPanel.add(btn);
-        informationPanel.add(btn2);
-        /////////////////////////////////////////////////////
+        mapPanel = new MapPanel(model.getBoxList());
+        mapPanel.addMouseMotionListener(placeBuildingListener);
+        menu = new MenuFrame(buildSolarPanel, buildWindTurbine, buildHydroPowerPlant, buildCoalPowerPlant, buildGasPowerPlant, buildNuclearPowerPlant, buildHouse, buildAppartement);
+        openMenuListener = new OpenMenuListener(menu);
+        informationPanel = new InformationPanel(openMenuListener);
+        gameFrame = new GameFrame(mapPanel, informationPanel);
 
         model.registerObserver(informationPanel);
         model.run();
@@ -139,7 +132,7 @@ public class GameController {
     }
 
     public BuildBuildingListener getBuildHydrauPowerPlant() {
-        return buildHydrauPowerPlant;
+        return buildHydroPowerPlant;
     }
 
     public BuildBuildingListener getBuildCoalPowerPlant() {

@@ -1,6 +1,5 @@
 package model;
 
-import java.sql.SQLOutput;
 import java.util.Random;
 
 public class Box
@@ -54,7 +53,7 @@ public class Box
                 this.containEnergySource = true;
                 break;
             case WATER:
-                this.energySource = new HydrauPowerPlant(this);
+                this.energySource = new HydroPowerPlant(this);
                 this.containEnergySource = true;
                 break;
             case NUCLEAR:

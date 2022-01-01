@@ -18,47 +18,21 @@ public class BuildingView extends JButton {
 
     public BuildingView(BuildingType type){
 
-        URL resource;
+        URL resource = switch (type) { // choisir l'image en fonction du type de bâtiment//TODO
 
-        // JSP PK LE SWITCH MARCHE PAS PTN
+            case NUCLEAR -> getClass().getResource("/res/img/nuclear.png");
+            case GAS -> getClass().getResource("/res/img/panel.png");
+            case COAL -> getClass().getResource("/res/img/panel.png");
+            case WATER -> getClass().getResource("/res/img/panel.png");
+            case SOLAR -> getClass().getResource("/res/img/panel.png");
+            case WIND -> getClass().getResource("/res/img/panel.png");
+            case HOUSE -> getClass().getResource("/res/img/panel.png");
+            case APPARTEMENT -> getClass().getResource("/res/img/panel.png");
+            default -> getClass().getResource("/res/img/grass.png");
+        };
 
-        /*switch (type) { // choisir l'image en fonction du type de bâtiment
-
-            case NUCLEAR:
-                resource = getClass().getResource("/res/img/nuclear.jpg");
-                break;
-            case GAS:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-            case COAL:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-            case WATER:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-            case SOLAR:
-                resource = getClass().getResource("/res/img/panel.jpg");
-                System.out.println("solarrrrr");
-                break;
-            case WIND:
-                resource = getClass().getResource("/res/img/turbine.jpg");
-                break;
-            case HOUSE:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-            case HOME:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-            default:
-                resource = getClass().getResource("/res/img/grass.jpg");
-                break;
-        }*/
-
-
-
-
-        resource = getClass().getResource("/res/img/panel.png");
         try {
+            assert resource != null;
             image = ImageIO.read(resource);
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,11 +40,6 @@ public class BuildingView extends JButton {
 
         this.setSize(32,32);
         this.setVisible(true);
-
-        //Ces 3 méthodes permettent de de donner au bouton la forme de son icone
-        /*this.setContentAreaFilled(false);
-        this.setFocusPainted(false);
-        this.setBorderPainted(false);*/
     }
 
     @Override
