@@ -10,6 +10,9 @@ public class Map extends Observable implements Runnable{
 
     public static final int NB_BOX_X = 32;
     public static final int NB_BOX_Y = 18;
+    public static final int BOUNDS_X=(int) NB_BOX_X/4;
+    public static final int BOUNDS_Y=(int) NB_BOX_X/4;
+
     public static final int UPDATE_DATA_FREQUENCY = 5;
     public static final int UPDATE_USER_MONEY_FREQUENCY = 10;
     public static final int UPDATE_POPULATION_AVAILABLE_FEQUENCY = 2*60;
@@ -41,9 +44,11 @@ public class Map extends Observable implements Runnable{
         energyPrice = 0.0;
         pollutionRate = 0.0;
         userMoney = STARTING_AMOUNT;
-
         nbOfFossilEnergy=0.0;
         nbOfRenewableEnergy = 0.0;
+
+
+
 
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
         Random xr_gas = new Random();
@@ -65,10 +70,11 @@ public class Map extends Observable implements Runnable{
         for(int i=0;i<NB_BOX_X;i++){
             for(int j=0;j<NB_BOX_Y;j++){
                 boxList[i][j] = new Box(NB_BOX_Y-j, 1+j, 0, randomFossilGen(i,j,x_gas,y_gas), randomFossilGen(i,j,x_coal,y_coal), randomFossilGen(i,j,x_uranium,y_uranium)); //public Box(double wind, double sun, double water, boolean gas, boolean coal, boolean uranium){}
-
-
             }
         }
+
+        randomStartRiverGeneration();//TODO mettre dans une fonction initialiseMap
+
 
         this.observerList = new ArrayList<>();
 
@@ -276,6 +282,89 @@ public class Map extends Observable implements Runnable{
             case NUCLEAR -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasUranium();
             default -> throw new IllegalArgumentException("BuildingType not found");
         };
+    }
+
+    private void randomStartRiverGeneration(){
+        int startingPosX;
+        int startingPosY;
+
+        Random r = new Random();
+        int a = r.nextInt(4);
+
+        if(a==0){
+            Random s0 = new Random();
+            startingPosX= s0.nextInt(NB_BOX_X-BOUNDS_X*2)+BOUNDS_X-1;
+            startingPosY=0;
+            for(startingPosY=0;startingPosY<5;startingPosY++){
+                boxList[startingPosX][startingPosY].setWater(1.0);
+            }
+
+            randomRiverGeneration(0.5, 0.8, startingPosX, startingPosY);
+        }
+        else if(a==1){
+            Random s1 = new Random();
+            startingPosX= s1.nextInt(NB_BOX_X-BOUNDS_X*2)+BOUNDS_X-1;
+            startingPosY=NB_BOX_Y-1;
+            for(startingPosY=NB_BOX_Y-1;startingPosY>NB_BOX_Y-5;startingPosY--){
+                boxList[startingPosX][startingPosY].setWater(1.0);
+            }
+
+            randomRiverGeneration(0.5, 0.2, startingPosX, startingPosY);
+        }
+        else if(a==2){
+            Random s2 = new Random();
+            int b2 = s2.nextInt(NB_BOX_Y-BOUNDS_Y*2)+BOUNDS_Y-1;
+            startingPosX=NB_BOX_X-1;
+            startingPosY=b2;
+            for(startingPosX=NB_BOX_X-1;startingPosX>NB_BOX_X-5;startingPosX--){
+                boxList[startingPosX][startingPosY].setWater(1.0);
+            }
+
+            randomRiverGeneration(0.2, 0.5, startingPosX, startingPosY);
+        }
+        else if(a==3){
+            Random s3 = new Random();
+            int b3 = s3.nextInt(NB_BOX_Y-BOUNDS_Y*2)+BOUNDS_Y-1;
+            startingPosX=0;
+            startingPosY=b3;
+            for(startingPosX=0;startingPosX<5;startingPosX++){
+                boxList[startingPosX][startingPosY].setWater(1.0);
+            }
+
+            randomRiverGeneration(0.8, 0.5, startingPosX, startingPosY);
+
+
+        }
+    }
+
+    private void randomRiverGeneration(double probXPlus, double probYPlus, int x, int y){
+        if(x>=0 && x<NB_BOX_X && y>=0 && y<NB_BOX_Y){
+            boxList[x][y].setWater(1.0);
+
+            Random rand0 = new Random();
+            double a = rand0.nextDouble();
+            if(a<0.5) {
+
+                Random rand1 = new Random();
+                if (rand1.nextDouble() < probXPlus)
+                    x++;
+                else
+                    x--;
+            }
+            else{
+
+                Random rand2 = new Random();
+                if(rand2.nextDouble()<probYPlus)
+                    y++;
+                else
+                    y--;
+            }
+
+            /*if(a<=(double)1/NB_BOX_X){
+                randomRiverGeneration(probXPlus, probYPlus, ++x, ++y);
+            }*/
+            randomRiverGeneration(probXPlus, probYPlus, x, y);
+        }
     }
 
     public Box[][] getBoxList() { return boxList; }

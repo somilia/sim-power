@@ -23,9 +23,9 @@ public class Box
 
 
     public Box(){
-        wind = 2;
-        sun = 2;
-        water = 2;
+        wind = 1;
+        sun = 1;
+        water = 0;
 
         containEnergySource=false;
         containHome = false;
@@ -132,6 +132,18 @@ public class Box
 
     public boolean hasCoal() {
         return coal;
+    }
+
+    public void setWind(double wind) {
+        this.wind = wind;
+    }
+
+    public void setSun(double sun) {
+        this.sun = sun;
+    }
+
+    public void setWater(double water) {
+        this.water = water;
     }
 
     public boolean hasUranium() {
