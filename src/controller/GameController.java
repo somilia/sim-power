@@ -4,6 +4,7 @@ import model.Map;
 import view.*;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 public class GameController {
 
@@ -30,7 +31,7 @@ public class GameController {
 
 
 
-    GameController() {
+    GameController() throws UnsupportedLookAndFeelException {
 
         model = new Map();
 
@@ -45,7 +46,7 @@ public class GameController {
         buildHouse = new BuildBuildingListener(this, buildingListener, BuildingType.HOUSE);
         buildAppartement = new BuildBuildingListener(this, buildingListener, BuildingType.APPARTEMENT);
 
-
+        UIManager.setLookAndFeel(new NimbusLookAndFeel());
 
         mapPanel = new MapPanel(model.getBoxList());
         mapPanel.addMouseMotionListener(placeBuildingListener);

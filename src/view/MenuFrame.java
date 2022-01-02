@@ -2,8 +2,10 @@ package view;
 
 import controller.BuildBuildingListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class MenuFrame extends JFrame implements MenuViewable{
 
@@ -27,21 +29,76 @@ public class MenuFrame extends JFrame implements MenuViewable{
 
         solarBuildBtn = new JButton("Solar Panel");
         solarBuildBtn.addActionListener(solarLst);
-        solarBuildBtn.setIcon(new ImageIcon("/res/img/solar.png"));
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/panel.png")));
+            solarBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        solarBuildBtn.repaint();
         windBuildBtn = new JButton("Wind turbine");
         windBuildBtn.addActionListener(windLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            windBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        windBuildBtn.repaint();
         hydroBuildBtn = new JButton("Hydro power Plant");
         hydroBuildBtn.addActionListener(waterLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            hydroBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        hydroBuildBtn.repaint();
         coalBuildBtn = new JButton("Coal power plant");
         coalBuildBtn.addActionListener(coalLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            coalBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        coalBuildBtn.repaint();
         gasBuildBtn = new JButton("Gas power plant");
         gasBuildBtn.addActionListener(gasLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            gasBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        gasBuildBtn.repaint();
         nuclearBuildBtn = new JButton("Nuclear power plant");
         nuclearBuildBtn.addActionListener(nuclearLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            nuclearBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        nuclearBuildBtn.repaint();
         houseBuildBtn = new JButton("Home");
         houseBuildBtn.addActionListener(houseLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            houseBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        houseBuildBtn.repaint();
         appartementBuildBtn = new JButton("Appartement building");
         appartementBuildBtn.addActionListener(appartementLst);
+        try {
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            appartementBuildBtn.setIcon(new ImageIcon(img));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        appartementBuildBtn.repaint();
 
 
         FlowLayout panelLayout = new FlowLayout(FlowLayout.CENTER);
