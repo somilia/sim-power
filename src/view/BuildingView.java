@@ -21,13 +21,13 @@ public class BuildingView extends JButton {
         URL resource = switch (type) { // choisir l'image en fonction du type de bâtiment//TODO
 
             case NUCLEAR -> getClass().getResource("/res/img/nuclear.png");
-            case GAS -> getClass().getResource("/res/img/panel.png");
-            case COAL -> getClass().getResource("/res/img/panel.png");
-            case WATER -> getClass().getResource("/res/img/panel.png");
+            case GAS -> getClass().getResource("/res/img/gaspower.png");
+            case COAL -> getClass().getResource("/res/img/coalpower.png");
+            case WATER -> getClass().getResource("/res/img/hydropower.png");
             case SOLAR -> getClass().getResource("/res/img/panel.png");
-            case WIND -> getClass().getResource("/res/img/panel.png");
-            case HOUSE -> getClass().getResource("/res/img/panel.png");
-            case APPARTEMENT -> getClass().getResource("/res/img/panel.png");
+            case WIND -> getClass().getResource("/res/img/turbine.png");
+            case HOUSE -> getClass().getResource("/res/img/house.png");
+            case APPARTEMENT -> getClass().getResource("/res/img/appartement.png");
             default -> getClass().getResource("/res/img/grass.png");
         };
 
