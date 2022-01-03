@@ -123,31 +123,26 @@ public class Map extends Observable implements Runnable{
      * Si il y a de la population disponible, on parcours les Home de la map et si elle ne sont pas remplies, on les remplis jusqu'à ce qu'elles soient pleines ou qu'il n'y est plus de population disponible
      */
     public void updatePopulation(){
-        int i=0;
-        int j=0;
 
-        while(population<populationMax && populationAvailable>0 && i<NB_BOX_X && j<NB_BOX_Y){
-            System.out.println("population : "+population+"populationMax : "+populationMax+"population available : "+populationAvailable);
-            System.out.println("box i="+i+" j="+j+ " "+boxList[i][j].getContainHome());
-            if (boxList[i][j].getContainHome()){
 
-                int freeSpace = boxList[i][j].getHome().getMaxNbOfHabitants() - boxList[i][j].getHome().getNbOfHabitants();
-                System.out.println("free space = "+freeSpace);
-                if(freeSpace>0){
-                    System.out.println("free space = "+freeSpace);
-                    if(populationAvailable>freeSpace){
-                        boxList[i][j].getHome().addHabitants(freeSpace);
-                        populationAvailable-= freeSpace;
-                        population+=freeSpace;
-                    }else{
-                        boxList[i][j].getHome().addHabitants(populationAvailable);
-                        population+=populationAvailable;
-                        populationAvailable=0;
+        for(int i=0; i<NB_BOX_X && population<populationMax && populationAvailable>0;i++){
+            for(int j=0;population<populationMax && populationAvailable>0 && j<NB_BOX_Y; j++){
+
+                if (boxList[i][j].getContainHome()){
+                    int freeSpace = boxList[i][j].getHome().getMaxNbOfHabitants() - boxList[i][j].getHome().getNbOfHabitants();
+                    if(freeSpace>0){
+                        if(populationAvailable>freeSpace){
+                            boxList[i][j].getHome().addHabitants(freeSpace);
+                            populationAvailable-= freeSpace;
+                            population+=freeSpace;
+                        }else{
+                            boxList[i][j].getHome().addHabitants(populationAvailable);
+                            population+=populationAvailable;
+                            populationAvailable=0;
+                        }
                     }
                 }
             }
-            i++;
-            j++;
         }
     }
 
