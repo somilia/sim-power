@@ -48,7 +48,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         hydroBuildBtn = new JButton("Hydro power Plant");
         hydroBuildBtn.addActionListener(waterLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/hydropower.png")));
             hydroBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +57,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         coalBuildBtn = new JButton("Coal power plant");
         coalBuildBtn.addActionListener(coalLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/coalpower.png")));
             coalBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         gasBuildBtn = new JButton("Gas power plant");
         gasBuildBtn.addActionListener(gasLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/gaspower.png")));
             gasBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         nuclearBuildBtn = new JButton("Nuclear power plant");
         nuclearBuildBtn.addActionListener(nuclearLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/nuclear.png")));
             nuclearBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         houseBuildBtn = new JButton("Home");
         houseBuildBtn.addActionListener(houseLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/house.png")));
             houseBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,7 +93,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         appartementBuildBtn = new JButton("Appartement building");
         appartementBuildBtn.addActionListener(appartementLst);
         try {
-            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
+            Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/appartement.png")));
             appartementBuildBtn.setIcon(new ImageIcon(img));
         } catch (Exception e) {
             e.printStackTrace();
