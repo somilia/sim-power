@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Box
 {
-    private static final double MEAN = 0.0;
+    private static final double MEAN = 0.0;// la moyenne de la variation est à 0 c'est à dire que la valeur moyenne de la production d'éléctricité est celle donnée à l'initialisation
     private static final double STANDARD_DERIVATION = 0.2;
 
     private double wind;
@@ -44,7 +44,6 @@ public class Box
     public void addBuilding(BuildingType type){
         switch (type){
             case SOLAR :
-                System.out.println("switch solar contain energy is true");
                 this.energySource = new SolarPanel(this);
                 this.containEnergySource = true;
                 break;
@@ -78,7 +77,6 @@ public class Box
             default:
                 throw new IllegalArgumentException("Building type for energySource not valid");
         }
-        System.out.println("addbuilding");
     }
 
     public void randomWindGen() {

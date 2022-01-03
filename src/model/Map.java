@@ -127,11 +127,14 @@ public class Map extends Observable implements Runnable{
         int j=0;
 
         while(population<populationMax && populationAvailable>0 && i<NB_BOX_X && j<NB_BOX_Y){
-
+            System.out.println("population : "+population+"populationMax : "+populationMax+"population available : "+populationAvailable);
+            System.out.println("box i="+i+" j="+j+ " "+boxList[i][j].getContainHome());
             if (boxList[i][j].getContainHome()){
 
                 int freeSpace = boxList[i][j].getHome().getMaxNbOfHabitants() - boxList[i][j].getHome().getNbOfHabitants();
+                System.out.println("free space = "+freeSpace);
                 if(freeSpace>0){
+                    System.out.println("free space = "+freeSpace);
                     if(populationAvailable>freeSpace){
                         boxList[i][j].getHome().addHabitants(freeSpace);
                         populationAvailable-= freeSpace;
@@ -213,7 +216,9 @@ public class Map extends Observable implements Runnable{
         userMoney-= type.price;
 
         if(type == BuildingType.HOUSE || type==BuildingType.APPARTEMENT){
+            System.out.println("popu max : "+populationMax);
             populationMax += boxList[posX][posY].getHome().getMaxNbOfHabitants();
+            System.out.println("popu max : "+populationMax);
             updatePopulation();
             updateEnergyPrice();
             notifyObservers();
