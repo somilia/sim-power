@@ -10,12 +10,14 @@ public class Map extends Observable implements Runnable{
 
     public static final int NB_BOX_X = 32;
     public static final int NB_BOX_Y = 18;
-    public static final int BOUNDS_X=(int) NB_BOX_X/4;
-    public static final int BOUNDS_Y=(int) NB_BOX_X/4;
+    public static final int BOUNDS_X= NB_BOX_X /4;
+    public static final int BOUNDS_Y= NB_BOX_X /4;
 
-    public static final int UPDATE_DATA_FREQUENCY = 5;
-    public static final int UPDATE_USER_MONEY_FREQUENCY = 10;
-    public static final int UPDATE_POPULATION_AVAILABLE_FEQUENCY = 2*60;
+    public static final long UPDATE_BOX_DATA_FREQUENCY = 5*1000;
+    public static final long UPDATE_GLOBAL_DATA = 5*1000;
+    public static final long UPDATE_USER_MONEY_FREQUENCY = 10*1000;
+    public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 2*1000;
+
     public static final int STARTING_AMOUNT = 10000;
     public static final int STARTING_POPULATION_AVAILABLE = 5;
 
@@ -106,12 +108,15 @@ public class Map extends Observable implements Runnable{
     }
 
     private void updatePopulationAvailable(){
-
-        if(pollutionRate<75 && energyPrice < 0.75 && energyPrice!=0 && pollutionRate!=0){
+        if(pollutionRate<0.75 && energyPrice < 0.75 && energyPrice>0){//avant il y avait pollution rate!=0 jsp pk
             double newPopulationAvailable = 1/(energyPrice*pollutionRate*4);
-            populationAvailable += (int) newPopulationAvailable;
+            if(newPopulationAvailable>5){
+                populationAvailable+=5;
+            }
+            else{
+                populationAvailable += (int) newPopulationAvailable;
+            }
         }
-        //TODO
     }
 
     private void addPopulationMax(int n){
@@ -240,9 +245,9 @@ public class Map extends Observable implements Runnable{
 
     private void updateGlobalData(){
 
-        updatePopulationAvailable();
+        //updatePopulationAvailable();
         updatePopulation();
-        updateUserMoney();
+        //updateUserMoney();
         updateEnergyProduced();
         updateEnergyPrice();
         updatePollutionRate();
@@ -256,17 +261,38 @@ public class Map extends Observable implements Runnable{
     @Override
     public void run() {
 
+        long boxLastUpdate=System.currentTimeMillis();
+        long userMoneyLastUpdate=System.currentTimeMillis();
+        long populationAvailableLastUpdate=System.currentTimeMillis();
+        long globalDataLastUpdate=System.currentTimeMillis();
+
         while(true){
 
-            updateBoxData();
-            updateGlobalData();
-            notifyObservers();
-
-            try {
-                Thread.sleep(UPDATE_DATA_FREQUENCY*1000);
+            if(System.currentTimeMillis()-boxLastUpdate >= UPDATE_BOX_DATA_FREQUENCY) {
+                updateBoxData();
+                notifyObservers();
+                boxLastUpdate=System.currentTimeMillis();
+            }
+            if(System.currentTimeMillis()-userMoneyLastUpdate >= UPDATE_USER_MONEY_FREQUENCY) {
+                updateUserMoney();
+                notifyObservers();
+                userMoneyLastUpdate=System.currentTimeMillis();
+            }
+            if(System.currentTimeMillis()-populationAvailableLastUpdate>= UPDATE_POPULATION_AVAILABLE_FREQUENCY) {
+                updatePopulationAvailable();
+                notifyObservers();
+                populationAvailableLastUpdate=System.currentTimeMillis();
+            }
+            if(System.currentTimeMillis()-globalDataLastUpdate >= UPDATE_GLOBAL_DATA) {
+                updateGlobalData();
+                notifyObservers();
+                globalDataLastUpdate=System.currentTimeMillis();
+            }
+            /*try {
+                Thread.sleep(UPDATE_BOX_DATA_FREQUENCY *1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
