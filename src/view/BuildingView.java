@@ -18,7 +18,7 @@ public class BuildingView extends JButton {
 
     public BuildingView(BuildingType type){
 
-        URL resource = switch (type) { // choisir l'image en fonction du type de bâtiment//TODO
+        URL resource = switch (type) { // choisir l'image en fonction du type de bâtiment
 
             case NUCLEAR -> getClass().getResource("/res/img/nuclear.png");
             case GAS -> getClass().getResource("/res/img/gaspower.png");

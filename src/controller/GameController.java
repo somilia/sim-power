@@ -1,6 +1,7 @@
 package controller;
 import model.BuildingType;
 import model.Map;
+import patterns.Observer;
 import view.*;
 
 import javax.swing.*;
@@ -9,8 +10,8 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 public class GameController {
 
     private GameFrame gameFrame;
-    private MapPanel mapPanel;
-    private InformationPanel informationPanel;
+    private MapViewable mapPanel;
+    private Observer informationPanel;
     private MenuViewable menu;
 
     private Map model;
@@ -47,7 +48,7 @@ public class GameController {
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
 
         mapPanel = new MapPanel(model.getBoxList());
-        mapPanel.addMouseMotionListener(placeBuildingListener);
+        mapPanel.addPlaceBuildingListener(placeBuildingListener);
         menu = new MenuFrame(buildSolarPanel, buildWindTurbine, buildHydroPowerPlant, buildCoalPowerPlant, buildGasPowerPlant, buildNuclearPowerPlant, buildHouse, buildAppartement);
         openMenuListener = new OpenMenuListener(menu);
         informationPanel = new InformationPanel(openMenuListener);
@@ -64,11 +65,11 @@ public class GameController {
 
 
 
-    public MapPanel getMapPanel() {
+    public MapViewable getMapPanel() {
         return mapPanel;
     }
 
-    public InformationPanel getInformationPanel() {
+    public Observer getInformationPanel() {
         return informationPanel;
     }
 

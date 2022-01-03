@@ -211,9 +211,7 @@ public class Map extends Observable implements Runnable{
         userMoney-= type.price;
 
         if(type == BuildingType.HOUSE || type==BuildingType.APPARTEMENT){
-            System.out.println("popu max : "+populationMax);
             populationMax += boxList[posX][posY].getHome().getMaxNbOfHabitants();
-            System.out.println("popu max : "+populationMax);
             updatePopulation();
             updateEnergyPrice();
             notifyObservers();

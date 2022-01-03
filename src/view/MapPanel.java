@@ -1,5 +1,6 @@
 package view;
 
+import controller.PlaceBuildingListener;
 import model.Box;
 import model.BuildingType;
 
@@ -71,6 +72,11 @@ public class MapPanel extends JPanel implements MapViewable{
     public void removeBuilding(BuildingView buildingView, int positionX, int positionY) {
         this.boxPanelsList[positionX][positionY].remove(buildingView);
         this.boxPanelsList[positionX][positionY].repaint();
+    }
+
+    @Override
+    public void addPlaceBuildingListener(PlaceBuildingListener placeBuildingListener) {
+        this.addMouseMotionListener(placeBuildingListener);
     }
 
 

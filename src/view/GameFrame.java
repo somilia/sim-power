@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.Box;
+import patterns.Observer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +14,12 @@ public class GameFrame extends JFrame {
     private MapPanel mapPanel;
     private InformationPanel informationPanel;
 
-    public GameFrame(MapPanel mapPanel, InformationPanel informationPanel) {
+    public GameFrame(MapViewable mapPanel, Observer informationPanel) {
         super();
         this.setTitle("Simpower");
         // this.gameController = gameController;
-        this.mapPanel = mapPanel;
-        this.informationPanel = informationPanel;
+        this.mapPanel = (MapPanel) mapPanel;
+        this.informationPanel = (InformationPanel) informationPanel;
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         this.setVisible(true);
@@ -26,8 +27,8 @@ public class GameFrame extends JFrame {
         this.setLayout(new BorderLayout());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        this.add(informationPanel, BorderLayout.NORTH);
-        this.add(mapPanel, BorderLayout.SOUTH);
+        this.add(this.informationPanel, BorderLayout.NORTH);
+        this.add(this.mapPanel, BorderLayout.SOUTH);
         this.pack();
     }
 }
