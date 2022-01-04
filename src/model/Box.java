@@ -42,6 +42,7 @@ public class Box
     }
 
     public void addBuilding(BuildingType type){
+        System.out.println("type in switch : "+type);
         switch (type){
             case SOLAR :
                 this.energySource = new SolarPanel(this);
@@ -74,6 +75,7 @@ public class Box
             case APPARTEMENT:
                 this.home = new AppartementBuilding();
                 this.containHome = true;
+                break;
             default:
                 throw new IllegalArgumentException("Building type for energySource not valid");
         }

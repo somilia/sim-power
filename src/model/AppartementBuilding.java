@@ -4,10 +4,10 @@ public class AppartementBuilding extends Home {
 
     public AppartementBuilding(){
         this.nbOfHabitants=0;
-        this.maxNbOfHabitants=5;
+        this.maxNbOfHabitants=12;
     }
 
     public int genMoney() {
-        return nbOfHabitants*50;
+        return nbOfHabitants*500;
     }
 }

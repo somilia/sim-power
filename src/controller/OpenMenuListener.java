@@ -17,6 +17,5 @@ public class OpenMenuListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         menuFrame.setVisible(true);
-        System.out.println("visible true");
     }
 }

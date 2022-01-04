@@ -18,7 +18,7 @@ public class Map extends Observable implements Runnable{
     public static final long UPDATE_USER_MONEY_FREQUENCY = 10*1000;
     public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 2*1000;
 
-    public static final int STARTING_AMOUNT = 10000;
+    public static final int STARTING_AMOUNT = 100000;
     public static final int STARTING_POPULATION_AVAILABLE = 5;
 
 
@@ -50,8 +50,6 @@ public class Map extends Observable implements Runnable{
         nbOfRenewableEnergy = 0.0;
 
 
-
-
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
         Random xr_gas = new Random();
         int x_gas = xr_gas.nextInt(9 - 2 + 1) + 2;   //r.nextInt((max - min) + 1) + min;
@@ -75,17 +73,13 @@ public class Map extends Observable implements Runnable{
             }
         }
 
-        randomStartRiverGeneration();//TODO mettre dans une fonction initialiseMap
-
+        randomStartRiverGeneration();
 
         this.observerList = new ArrayList<>();
 
     }
-    public boolean randomFossilGen(int i, int j, int x, int y) {
-        if(((i+2==x)||(i-2==x) || (i+1==x)||(i-1==x) || (i==x)) && ((j+2==y)||(j-2==y) || (j+1==y)||(j-1==y) || (j==y)) && !(((i+2==x)&&(j+2==y)||(i-2==x)&&(j-2==y)||(i+2==x)&&(j-2==y)||(i-2==x)&&(j+2==y)))){
-            return true;
-        }else {return false;}
-    }
+
+
 /*
     public void randomFossilGen() {
         Random x = new Random();
@@ -128,7 +122,6 @@ public class Map extends Observable implements Runnable{
      * Si il y a de la population disponible, on parcours les Home de la map et si elle ne sont pas remplies, on les remplis jusqu'à ce qu'elles soient pleines ou qu'il n'y est plus de population disponible
      */
     public void updatePopulation(){
-
 
         for(int i=0; i<NB_BOX_X && population<populationMax && populationAvailable>0;i++){
             for(int j=0;population<populationMax && populationAvailable>0 && j<NB_BOX_Y; j++){
@@ -211,7 +204,7 @@ public class Map extends Observable implements Runnable{
     }
 
     public void buildBuilding(int posX, int posY, BuildingType type) {
-
+        System.out.println("type : "+type);
         boxList[posX][posY].addBuilding(type);//TODO try catch ?
         userMoney-= type.price;
 
@@ -300,12 +293,19 @@ public class Map extends Observable implements Runnable{
     public boolean canBuildOnBox(int positionX, int positionY, BuildingType buildingType){
 
         return switch (buildingType) {
-            case SOLAR, WIND, WATER,HOUSE,APPARTEMENT -> boxIsEmpty(positionX, positionY);
+            case SOLAR, WIND,HOUSE,APPARTEMENT -> boxIsEmpty(positionX, positionY);
+            case WATER -> boxIsEmpty(positionX,positionY) && boxList[positionX][positionY].getWater()>0;
             case COAL -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasCoal();
             case GAS -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasGas();
             case NUCLEAR -> boxIsEmpty(positionX, positionY) && boxList[positionX][positionY].hasUranium();
             default -> throw new IllegalArgumentException("BuildingType not found");
         };
+    }
+
+    public boolean randomFossilGen(int i, int j, int x, int y) {
+        if(((i+2==x)||(i-2==x) || (i+1==x)||(i-1==x) || (i==x)) && ((j+2==y)||(j-2==y) || (j+1==y)||(j-1==y) || (j==y)) && !(((i+2==x)&&(j+2==y)||(i-2==x)&&(j-2==y)||(i+2==x)&&(j-2==y)||(i-2==x)&&(j+2==y)))){
+            return true;
+        }else {return false;}
     }
 
     private void randomStartRiverGeneration(){
