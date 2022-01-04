@@ -51,25 +51,33 @@ public class PlaceBuildingListener implements MouseMotionListener {
             gameController.getMapPanel().removeBuilding(buildingView, previousPosX, previousPosY);
             previousPosX = e.getX() / (MapPanel.MAP_PANEL_WIDTH / Map.NB_BOX_X);
             previousPosY = e.getY() / (MapPanel.MAP_PANEL_HEIGHT / Map.NB_BOX_Y);
+            buildingView.setPositionX(previousPosX);
+            buildingView.setPositionY(previousPosY);
             gameController.getMapPanel().repaint();
 
             if (gameController.getModel().canBuildOnBox(e.getX() / (MapPanel.MAP_PANEL_WIDTH / Map.NB_BOX_X), e.getY() / (MapPanel.MAP_PANEL_HEIGHT / Map.NB_BOX_Y), buildingType)) {
                 boxIsAvailable = true;
+                System.out.println("PlaceBuilding : can build on box : "+boxIsAvailable);
                 //TODO on met en vert l'objet
             } else {
                 boxIsAvailable = false;
+                System.out.println("PlaceBuilding : can build on box : "+boxIsAvailable);
                 // TODO mettre en rouge l'objet
             }
         }
     }
 
 
-    public void mouseClicked() {
+    public boolean mouseClicked() {
         if (boxIsAvailable) {
+            System.out.println("mouse clicked on placebuilding");
             isPlacingBuilding = false;
             boxIsAvailable = false;
             gameController.getModel().buildBuilding(previousPosX, previousPosY, buildingType);
+            previousPosX=INITIAL_POSITION_X;//on reinitialise les positions initiales pour le placement du prochain bâtiment;
+            previousPosY=INITIAL_POSITION_Y;
         }
+        return boxIsAvailable;
     }
 
 

@@ -14,12 +14,10 @@ public class BuildBuildingListener implements ActionListener {
     public static int INITIAL_POSITION_Y = 8;
 
     GameController gameController;
-    BuildingListener buildingListener;
     BuildingType buildingType;
 
-    BuildBuildingListener(GameController gameController, BuildingListener buildingListener, BuildingType buildingType){
+    BuildBuildingListener(GameController gameController, BuildingType buildingType){
         this.gameController = gameController;
-        this.buildingListener = buildingListener;
         this.buildingType = buildingType;
     }
 
@@ -29,8 +27,7 @@ public class BuildBuildingListener implements ActionListener {
 
         if(gameController.getModel().hasEnoughMoney(buildingType)) {
 
-            BuildingView tempBuildingView = new BuildingView(buildingType);
-            tempBuildingView.addActionListener(buildingListener);
+            BuildingView tempBuildingView = new BuildingView(buildingType, gameController);
 
             gameController.getMapPanel().addBuilding(tempBuildingView, INITIAL_POSITION_X, INITIAL_POSITION_Y);
             gameController.getMapPanel().repaint();

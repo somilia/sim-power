@@ -37,6 +37,7 @@ public class BoxPanel extends JPanel{
         else{resource = getClass().getResource("/res/img/grass.png");}
 
         try {
+            assert resource != null;
             image = ImageIO.read(resource);
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,5 +53,22 @@ public class BoxPanel extends JPanel{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(image, 0, 0, null);
+    }
+
+    public void addBuilding(BuildingView buildingView){
+        this.buildingView = buildingView;
+        this.add(buildingView);
+        this.repaint();
+    }
+
+    public void removeBuilding(BuildingView buildingView){
+        this.buildingView = null;
+        this.remove(buildingView);
+        this.repaint();
+    }
+
+
+    public BuildingView getBuildingView() {
+        return buildingView;
     }
 }

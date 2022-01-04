@@ -1,14 +1,12 @@
 package view;
 
 import controller.OpenMenuListener;
-import patterns.Observable;
-import patterns.Observer;
+import patterns.InformationObserver;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 
-public class InformationPanel extends JPanel implements Observer {
+public class InformationPanel extends JPanel implements InformationObserver {
 
     public static final int INFO_PANEL_WHIDTH = 1024;
     public static final int INFO_PANEL_HEIGHT = 50;

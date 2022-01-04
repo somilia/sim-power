@@ -1,7 +1,7 @@
 package controller;
 import model.BuildingType;
 import model.Map;
-import patterns.Observer;
+import patterns.InformationObserver;
 import view.*;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ public class GameController {
 
     private GameFrame gameFrame;
     private MapViewable mapPanel;
-    private Observer informationPanel;
+    private InformationObserver informationPanel;
     private MenuViewable menu;
 
     private Map model;
@@ -35,15 +35,14 @@ public class GameController {
         model = new Map();
 
         placeBuildingListener = new PlaceBuildingListener(this);
-        buildingListener = new BuildingListener(this);
-        buildSolarPanel = new BuildBuildingListener(this, buildingListener, BuildingType.SOLAR);
-        buildWindTurbine = new BuildBuildingListener(this, buildingListener, BuildingType.WIND);
-        buildHydroPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.WATER);
-        buildCoalPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.COAL);
-        buildGasPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.GAS);
-        buildNuclearPowerPlant = new BuildBuildingListener(this, buildingListener, BuildingType.NUCLEAR);
-        buildHouse = new BuildBuildingListener(this, buildingListener, BuildingType.HOUSE);
-        buildAppartement = new BuildBuildingListener(this, buildingListener, BuildingType.APPARTEMENT);
+        buildSolarPanel = new BuildBuildingListener(this, BuildingType.SOLAR);
+        buildWindTurbine = new BuildBuildingListener(this, BuildingType.WIND);
+        buildHydroPowerPlant = new BuildBuildingListener(this, BuildingType.WATER);
+        buildCoalPowerPlant = new BuildBuildingListener(this, BuildingType.COAL);
+        buildGasPowerPlant = new BuildBuildingListener(this, BuildingType.GAS);
+        buildNuclearPowerPlant = new BuildBuildingListener(this, BuildingType.NUCLEAR);
+        buildHouse = new BuildBuildingListener(this, BuildingType.HOUSE);
+        buildAppartement = new BuildBuildingListener(this, BuildingType.APPARTEMENT);
 
         UIManager.setLookAndFeel(new NimbusLookAndFeel());
 
@@ -54,7 +53,8 @@ public class GameController {
         informationPanel = new InformationPanel(openMenuListener);
         gameFrame = new GameFrame(mapPanel, informationPanel);
 
-        model.registerObserver(informationPanel);
+        model.registerInformationObserver(informationPanel);
+        model.registerHomeObserver(mapPanel);
         model.run();
 
     }
@@ -69,7 +69,7 @@ public class GameController {
         return mapPanel;
     }
 
-    public Observer getInformationPanel() {
+    public InformationObserver getInformationPanel() {
         return informationPanel;
     }
 

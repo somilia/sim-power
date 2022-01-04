@@ -1,10 +1,9 @@
 package view;
 
-import model.Map;
 import patterns.Observable;
-import patterns.Observer;
+import patterns.InformationObserver;
 
-public interface InformationViewable extends Observer {
+public interface InformationViewable extends InformationObserver {
 
     //public void setController(GameController gc);
     public void updateData(Observable obs);

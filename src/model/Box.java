@@ -21,7 +21,6 @@ public class Box
     private EnergySources energySource;
     private Home home;
 
-
     public Box(){
         wind = 1;
         sun = 1;

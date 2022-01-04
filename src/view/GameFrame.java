@@ -1,8 +1,6 @@
 package view;
 
-import controller.GameController;
-import model.Box;
-import patterns.Observer;
+import patterns.InformationObserver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +10,7 @@ public class GameFrame extends JFrame {
     private MapPanel mapPanel;
     private InformationPanel informationPanel;
 
-    public GameFrame(MapViewable mapPanel, Observer informationPanel) {
+    public GameFrame(MapViewable mapPanel, InformationObserver informationPanel) {
         super();
         this.setTitle("Simpower");
         this.mapPanel = (MapPanel) mapPanel;

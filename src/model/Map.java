@@ -1,7 +1,8 @@
 package model;
 
 import patterns.Observable;
-import patterns.Observer;
+import patterns.InformationObserver;
+import view.HomeObserver;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +19,7 @@ public class Map extends Observable implements Runnable{
     public static final long UPDATE_USER_MONEY_FREQUENCY = 10*1000;
     public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 2*1000;
 
-    public static final int STARTING_AMOUNT = 100000;
+    public static final int STARTING_AMOUNT = 1000000;
     public static final int STARTING_POPULATION_AVAILABLE = 5;
 
 
@@ -34,6 +35,7 @@ public class Map extends Observable implements Runnable{
     private double nbOfRenewableEnergy;
 
     private Box[][] boxList;
+    private int[][] buildingMoneyAmount;
 
 
 
@@ -48,6 +50,14 @@ public class Map extends Observable implements Runnable{
         userMoney = STARTING_AMOUNT;
         nbOfFossilEnergy=0.0;
         nbOfRenewableEnergy = 0.0;
+
+        buildingMoneyAmount = new int[NB_BOX_X][NB_BOX_Y];
+        for (int[] i : buildingMoneyAmount) {
+            for(int j : i){
+                j = 0;
+            }
+        }
+
 
 
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
@@ -75,7 +85,8 @@ public class Map extends Observable implements Runnable{
 
         randomStartRiverGeneration();
 
-        this.observerList = new ArrayList<>();
+        this.informationObserverList = new ArrayList<>();
+        this.homeObserverList = new ArrayList<>();
 
     }
 
@@ -95,11 +106,19 @@ public class Map extends Observable implements Runnable{
     }
 */
     @Override
-    public void notifyObservers() {
-        for (Observer obs: observerList) {
+    public void notifyInformationObservers() {
+        for (InformationObserver obs: informationObserverList) {
             obs.update(population, populationAvailable, populationMax, energyProduced, energyPrice, pollutionRate, userMoney);
         }
     }
+
+    @Override
+    public void notifyHomeObservers(int x, int y) {
+        for(HomeObserver obs : homeObserverList){
+            obs.update(x,y);
+        }
+    }
+
 
     private void updatePopulationAvailable(){
         if(pollutionRate<0.75 && energyPrice < 0.75 && energyPrice>0){//avant il y avait pollution rate!=0 jsp pk
@@ -160,15 +179,28 @@ public class Map extends Observable implements Runnable{
         //TODO change into calculate the ration between the energy produced by fossil and renewable
     }
 
-    private void updateUserMoney(){
-
+    private void updateMoneyCollect(){
+        int i=0, j=0;
         for (Box[] array :boxList) {
             for (Box box:array) {
                 if (box.getContainHome()){
-                    userMoney += box.getHome().genMoney();
+                    if(System.currentTimeMillis()-box.getHome().getLastMoneyCollect() >= box.getHome().getMoneyFrequency()){
+                        notifyHomeObservers(i,j);
+                        box.getHome().setLastMoneyCollect(System.currentTimeMillis());
+                        buildingMoneyAmount[i][j]+=box.getHome().genMoney();
+                    }
                 }
+                j++;
             }
+            j=0;
+            i++;
         }
+    }
+
+    public void addMoney(int x, int y){
+        this.userMoney += buildingMoneyAmount[x][y];
+        buildingMoneyAmount[x][y]=0;
+        notifyInformationObservers();
     }
 
     private void updateEnergyProduced(){
@@ -212,17 +244,17 @@ public class Map extends Observable implements Runnable{
             populationMax += boxList[posX][posY].getHome().getMaxNbOfHabitants();
             updatePopulation();
             updateEnergyPrice();
-            notifyObservers();
+            notifyInformationObservers();
         }
         else if(type==BuildingType.COAL || type==BuildingType.GAS || type==BuildingType.NUCLEAR ){
             this.nbOfFossilEnergy++;
             updatePollutionRate();
-            notifyObservers();
+            notifyInformationObservers();
         }
         else if(type== BuildingType.SOLAR || type==BuildingType.WIND || type==BuildingType.WATER){
             this.nbOfRenewableEnergy++;
             updatePollutionRate();
-            notifyObservers();
+            notifyInformationObservers();
         }
     }
 
@@ -263,22 +295,23 @@ public class Map extends Observable implements Runnable{
 
             if(System.currentTimeMillis()-boxLastUpdate >= UPDATE_BOX_DATA_FREQUENCY) {
                 updateBoxData();
-                notifyObservers();
+                notifyInformationObservers();
                 boxLastUpdate=System.currentTimeMillis();
             }
-            if(System.currentTimeMillis()-userMoneyLastUpdate >= UPDATE_USER_MONEY_FREQUENCY) {
+            updateMoneyCollect();
+            /*if(System.currentTimeMillis()-userMoneyLastUpdate >= UPDATE_USER_MONEY_FREQUENCY) {
                 updateUserMoney();
                 notifyObservers();
                 userMoneyLastUpdate=System.currentTimeMillis();
-            }
+            }*/
             if(System.currentTimeMillis()-populationAvailableLastUpdate>= UPDATE_POPULATION_AVAILABLE_FREQUENCY) {
                 updatePopulationAvailable();
-                notifyObservers();
+                notifyInformationObservers();
                 populationAvailableLastUpdate=System.currentTimeMillis();
             }
             if(System.currentTimeMillis()-globalDataLastUpdate >= UPDATE_GLOBAL_DATA) {
                 updateGlobalData();
-                notifyObservers();
+                notifyInformationObservers();
                 globalDataLastUpdate=System.currentTimeMillis();
             }
             /*try {
