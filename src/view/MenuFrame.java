@@ -10,6 +10,7 @@ import java.util.Objects;
 public class MenuFrame extends JFrame implements MenuViewable{
 
     private JTabbedPane menuPane;
+    private JLabel error;
 
     private JButton coalBuildBtn;
     private JButton gasBuildBtn;
@@ -100,6 +101,10 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         appartementBuildBtn.repaint();
 
+        error = new JLabel("ouiiiiiiiiiiiiiiii");
+        error.setLayout(new BorderLayout());
+
+        error.setVisible(true);
 
         FlowLayout panelLayout = new FlowLayout(FlowLayout.CENTER);
 
@@ -107,15 +112,18 @@ public class MenuFrame extends JFrame implements MenuViewable{
         renewablePanel.add(solarBuildBtn);
         renewablePanel.add(windBuildBtn);
         renewablePanel.add(hydroBuildBtn);
+        renewablePanel.add(error, BorderLayout.SOUTH);
         renewablePanel.setLayout(panelLayout);
         JPanel fossilPanel = new JPanel();
         fossilPanel.add(coalBuildBtn);
         fossilPanel.add(gasBuildBtn);
         fossilPanel.add(nuclearBuildBtn);
+        fossilPanel.add(error, BorderLayout.SOUTH);
         fossilPanel.setLayout(panelLayout);
         JPanel homePanel = new JPanel();
         homePanel.add(houseBuildBtn);
         homePanel.add(appartementBuildBtn);
+        homePanel.add(error, BorderLayout.SOUTH);
         homePanel.setLayout(panelLayout);
 
         menuPane = new JTabbedPane();
@@ -126,14 +134,21 @@ public class MenuFrame extends JFrame implements MenuViewable{
         menuPane.addTab("Fossil energy", fossilPanel);
         menuPane.addTab("Home", homePanel);
 
+
         this.add(menuPane);
         this.pack();
         this.setResizable(false);
+
+
     }
 
     @Override
     public void printErrorMessage(String message) {
         //TODO
+        error.setText(message);
+        this.add(error);
+        error.setVisible(true);
+        //error.setVisible(false);
     }
 
     @Override
