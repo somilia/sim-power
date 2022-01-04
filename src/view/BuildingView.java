@@ -54,11 +54,11 @@ public class BuildingView extends JButton implements BuildingViewable{
                 break;
             case HOUSE:
                 resourceWithoutMoney = getClass().getResource("/res/img/house.png");
-                resourceWithMoney = getClass().getResource("/res/img/nuclear.png");
+                resourceWithMoney = getClass().getResource("/res/img/house_money.png");
                 break;
             case APPARTEMENT:
                 resourceWithoutMoney = getClass().getResource("/res/img/appartement.png");
-                resourceWithMoney = getClass().getResource("/res/img/nuclear.png");
+                resourceWithMoney = getClass().getResource("/res/img/appartement_money.png");
                 break;
             default:
                 resourceWithoutMoney = getClass().getResource("/res/img/grass.png");
