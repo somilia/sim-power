@@ -300,6 +300,12 @@ public class Map extends Observable implements Runnable{
                 notifyInformationObservers();
                 globalDataLastUpdate=System.currentTimeMillis();
             }
+
+            try {
+                Thread.sleep(100);//Pour réduire l'utilisation du CPU :)
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

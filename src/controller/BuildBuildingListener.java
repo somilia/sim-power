@@ -30,7 +30,7 @@ public class BuildBuildingListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(gameController.getModel().hasEnoughMoney(buildingType)) {
+        if(gameController.getModel().hasEnoughMoney(buildingType) && !gameController.getPlaceBuildingListener().isPlacingBuilding()) {
 
             BuildingViewable tempBuildingView = new BuildingView(buildingType, gameController);//Si l'utilisateur à assez d'argent, on instancie la vue du bâtiment et on la passe à MapPanel
 

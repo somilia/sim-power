@@ -73,10 +73,9 @@ public class PlaceBuildingListener implements MouseMotionListener {
     }
 
 
-
-
-
-
+    public boolean isPlacingBuilding() {
+        return isPlacingBuilding;
+    }
 
     @Override
     public void mouseDragged(MouseEvent e) {
