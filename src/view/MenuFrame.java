@@ -10,7 +10,10 @@ import java.util.Objects;
 public class MenuFrame extends JFrame implements MenuViewable{
 
     private JTabbedPane menuPane;
-    private JLabel error;
+
+    private JLabel error1;
+    private JLabel error2;
+    private JLabel error3;
 
     private JButton coalBuildBtn;
     private JButton gasBuildBtn;
@@ -101,33 +104,41 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         appartementBuildBtn.repaint();
 
-        error = new JLabel("ouiiiiiiiiiiiiiiii");
-        error.setLayout(new BorderLayout());
-
-        error.setVisible(true);
+        error1 = new JLabel();
+        error2 = new JLabel();
+        error3 = new JLabel();
+        error1.setVisible(false);
+        error2.setVisible(false);
+        error3.setVisible(false);
 
         FlowLayout panelLayout = new FlowLayout(FlowLayout.CENTER);
+
 
         JPanel renewablePanel = new JPanel();
         renewablePanel.add(solarBuildBtn);
         renewablePanel.add(windBuildBtn);
         renewablePanel.add(hydroBuildBtn);
-        renewablePanel.add(error, BorderLayout.SOUTH);
+        renewablePanel.add(error1, BorderLayout.SOUTH);
+        error1.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
         renewablePanel.setLayout(panelLayout);
+
         JPanel fossilPanel = new JPanel();
         fossilPanel.add(coalBuildBtn);
         fossilPanel.add(gasBuildBtn);
         fossilPanel.add(nuclearBuildBtn);
-        fossilPanel.add(error, BorderLayout.SOUTH);
+        fossilPanel.add(error2, BorderLayout.SOUTH);
+        error2.setBorder(BorderFactory.createEmptyBorder(40, 10, 30, 10));
         fossilPanel.setLayout(panelLayout);
+
         JPanel homePanel = new JPanel();
         homePanel.add(houseBuildBtn);
         homePanel.add(appartementBuildBtn);
-        homePanel.add(error, BorderLayout.SOUTH);
+        homePanel.add(error3, BorderLayout.SOUTH);
+        error3.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         homePanel.setLayout(panelLayout);
 
         menuPane = new JTabbedPane();
-        menuPane.setPreferredSize( new Dimension( 500, 250 ) );
+        menuPane.setPreferredSize( new Dimension(500, 250));
         menuPane.setTabPlacement( JTabbedPane.TOP );
         menuPane.setVisible(true);
         menuPane.addTab("Renewable energy", renewablePanel);
@@ -145,10 +156,21 @@ public class MenuFrame extends JFrame implements MenuViewable{
     @Override
     public void printErrorMessage(String message) {
         //TODO
-        error.setText(message);
-        this.add(error);
-        error.setVisible(true);
-        //error.setVisible(false);
+        error1.setText(message);
+        error1.setVisible(true);
+        error2.setText(message);
+        error2.setVisible(true);
+        error3.setText(message);
+        error3.setVisible(true);
+        long Visible = System.currentTimeMillis();
+       /* while(error1.isVisible()){
+            if(System.currentTimeMillis()-Visible >= 100){ // il ne veut pas apparaitre et disparaitre
+                error1.setVisible(false);
+                error2.setVisible(false);
+                error3.setVisible(false);
+            }
+
+        }*/
     }
 
 }
