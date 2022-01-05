@@ -2,11 +2,10 @@ package controller;
 
 import model.BuildingType;
 import model.Map;
-import view.BuildingView;
+import view.BuildingViewable;
 import view.MapPanel;
 
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 public class PlaceBuildingListener implements MouseMotionListener {
@@ -18,7 +17,7 @@ public class PlaceBuildingListener implements MouseMotionListener {
     private GameController gameController;
 
     private BuildingType buildingType;
-    private BuildingView buildingView;
+    private BuildingViewable buildingView;
 
     private boolean isPlacingBuilding;
     private boolean boxIsAvailable;
@@ -34,7 +33,7 @@ public class PlaceBuildingListener implements MouseMotionListener {
         this.previousPosY = INITIAL_POSITION_Y;
     }
 
-    public void activatePlacingBuilding(BuildingView buildingView, BuildingType buildingType) {
+    public void activatePlacingBuilding(BuildingViewable buildingView, BuildingType buildingType) {
         this.buildingView = buildingView;
         this.buildingType = buildingType;
         this.isPlacingBuilding = true;
@@ -55,22 +54,15 @@ public class PlaceBuildingListener implements MouseMotionListener {
             buildingView.setPositionY(previousPosY);
             gameController.getMapPanel().repaint();
 
-            if (gameController.getModel().canBuildOnBox(e.getX() / (MapPanel.MAP_PANEL_WIDTH / Map.NB_BOX_X), e.getY() / (MapPanel.MAP_PANEL_HEIGHT / Map.NB_BOX_Y), buildingType)) {
-                boxIsAvailable = true;
-                System.out.println("PlaceBuilding : can build on box : "+boxIsAvailable);
-                //TODO on met en vert l'objet
-            } else {
-                boxIsAvailable = false;
-                System.out.println("PlaceBuilding : can build on box : "+boxIsAvailable);
-                // TODO mettre en rouge l'objet
-            }
+            //TODO on met en vert l'objet
+            // TODO mettre en rouge l'objet
+            boxIsAvailable = gameController.getModel().canBuildOnBox(e.getX() / (MapPanel.MAP_PANEL_WIDTH / Map.NB_BOX_X), e.getY() / (MapPanel.MAP_PANEL_HEIGHT / Map.NB_BOX_Y), buildingType);
         }
     }
 
 
     public boolean mouseClicked() {
         if (boxIsAvailable) {
-            System.out.println("mouse clicked on placebuilding");
             isPlacingBuilding = false;
             boxIsAvailable = false;
             gameController.getModel().buildBuilding(previousPosX, previousPosY, buildingType);

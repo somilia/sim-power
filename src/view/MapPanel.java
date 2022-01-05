@@ -2,20 +2,14 @@ package view;
 
 import controller.PlaceBuildingListener;
 import model.Box;
-import model.BuildingType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MapPanel extends JPanel implements MapViewable{
 
     public static final int MAP_PANEL_WIDTH = 1024;
     public static final int MAP_PANEL_HEIGHT = 576;
-    public static final int MAP_PANEL_COORD_X = 0;
-    public static final int MAP_PANEL_COORD_Y = 50;
-
 
 
     private BoxPanel[][] boxPanelsList;
@@ -24,9 +18,6 @@ public class MapPanel extends JPanel implements MapViewable{
     public MapPanel(Box[][] boxes) {
 
         super();
-        //this.setPreferredSize(new Dimension(MAP_PANEL_WIDTH, MAP_PANEL_HEIGHT));
-       // this.setBorder(new EmptyBorder(20, 20, 20, 20));
-        this.setBackground(Color.GREEN);
 
         boxPanelsList = new BoxPanel[32][18];
         initializeMap(boxes);
@@ -61,12 +52,12 @@ public class MapPanel extends JPanel implements MapViewable{
     }
 
     @Override
-    public void addBuilding(BuildingView buildingView, int positionX, int positionY) {
+    public void addBuilding(BuildingViewable buildingView, int positionX, int positionY) {
         this.boxPanelsList[positionX][positionY].addBuilding(buildingView);
     }
 
     @Override
-    public void removeBuilding(BuildingView buildingView, int positionX, int positionY) {
+    public void removeBuilding(BuildingViewable buildingView, int positionX, int positionY) {
         this.boxPanelsList[positionX][positionY].removeBuilding(buildingView);
     }
 
@@ -78,7 +69,6 @@ public class MapPanel extends JPanel implements MapViewable{
 
     @Override
     public void update(int x, int y) {
-        System.out.println("update x : "+x+" y : "+y);
         this.boxPanelsList[x][y].getBuildingView().setImageMoneyCollect();
     }
 

@@ -34,36 +34,22 @@ public class BuildingView extends JButton implements BuildingViewable{
 
         switch (type) { // choisir l'image en fonction du type de bâtiment
 
-            case NUCLEAR:
-                resourceWithoutMoney = getClass().getResource("/res/img/nuclear.png");
-                break;
-            case GAS:
-                resourceWithoutMoney = getClass().getResource("/res/img/gaspower.png");
-                break;
-            case COAL:
-                resourceWithoutMoney = getClass().getResource("/res/img/coalpower.png");
-                break;
-            case WATER:
-                resourceWithoutMoney = getClass().getResource("/res/img/hydropower.png");
-                break;
-            case SOLAR:
-                resourceWithoutMoney = getClass().getResource("/res/img/panel.png");
-                break;
-            case WIND:
-                resourceWithoutMoney = getClass().getResource("/res/img/turbine.png");
-                break;
-            case HOUSE:
+            case NUCLEAR -> resourceWithoutMoney = getClass().getResource("/res/img/nuclear.png");
+            case GAS -> resourceWithoutMoney = getClass().getResource("/res/img/gaspower.png");
+            case COAL -> resourceWithoutMoney = getClass().getResource("/res/img/coalpower.png");
+            case WATER -> resourceWithoutMoney = getClass().getResource("/res/img/hydropower.png");
+            case SOLAR -> resourceWithoutMoney = getClass().getResource("/res/img/panel.png");
+            case WIND -> resourceWithoutMoney = getClass().getResource("/res/img/turbine.png");
+            case HOUSE -> {
                 resourceWithoutMoney = getClass().getResource("/res/img/house.png");
                 resourceWithMoney = getClass().getResource("/res/img/house_money.png");
-                break;
-            case APPARTEMENT:
+            }
+            case APPARTEMENT -> {
                 resourceWithoutMoney = getClass().getResource("/res/img/appartement.png");
                 resourceWithMoney = getClass().getResource("/res/img/appartement_money.png");
-                break;
-            default:
-                resourceWithoutMoney = getClass().getResource("/res/img/grass.png");
-                break;
-        };
+            }
+            default -> resourceWithoutMoney = getClass().getResource("/res/img/grass.png");
+        }
 
         try {
             assert resourceWithoutMoney != null;

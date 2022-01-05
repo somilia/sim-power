@@ -151,8 +151,4 @@ public class MenuFrame extends JFrame implements MenuViewable{
         //error.setVisible(false);
     }
 
-    @Override
-    public void placeBuilding() {
-
-    }
 }

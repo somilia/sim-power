@@ -17,7 +17,6 @@ public class GameController {
     private Map model;
 
     private PlaceBuildingListener placeBuildingListener;
-    private BuildingListener buildingListener;
     private OpenMenuListener openMenuListener;
     private BuildBuildingListener buildSolarPanel;
     private BuildBuildingListener buildWindTurbine;
@@ -31,9 +30,25 @@ public class GameController {
 
 
     GameController() throws UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(new NimbusLookAndFeel());
+    }
 
+    public void start(){
+        instantiateModel();
+        instantiateListeners();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                instantiateView();
+            }
+        });
+        model.run();
+    }
+
+    private void instantiateModel(){
         model = new Map();
+    }
 
+    private void instantiateListeners(){
         placeBuildingListener = new PlaceBuildingListener(this);
         buildSolarPanel = new BuildBuildingListener(this, BuildingType.SOLAR);
         buildWindTurbine = new BuildBuildingListener(this, BuildingType.WIND);
@@ -43,9 +58,9 @@ public class GameController {
         buildNuclearPowerPlant = new BuildBuildingListener(this, BuildingType.NUCLEAR);
         buildHouse = new BuildBuildingListener(this, BuildingType.HOUSE);
         buildAppartement = new BuildBuildingListener(this, BuildingType.APPARTEMENT);
+    }
 
-        UIManager.setLookAndFeel(new NimbusLookAndFeel());
-
+    private void instantiateView(){
         mapPanel = new MapPanel(model.getBoxList());
         mapPanel.addPlaceBuildingListener(placeBuildingListener);
         menu = new MenuFrame(buildSolarPanel, buildWindTurbine, buildHydroPowerPlant, buildCoalPowerPlant, buildGasPowerPlant, buildNuclearPowerPlant, buildHouse, buildAppartement);
@@ -55,11 +70,7 @@ public class GameController {
 
         model.registerInformationObserver(informationPanel);
         model.registerHomeObserver(mapPanel);
-        model.run();
-
     }
-
-
 
 
 
@@ -69,44 +80,12 @@ public class GameController {
         return mapPanel;
     }
 
-    public InformationObserver getInformationPanel() {
-        return informationPanel;
-    }
-
     public MenuViewable getMenu() {
         return menu;
     }
 
     public Map getModel() {
         return model;
-    }
-
-    public BuildingListener getBuildingListener() {
-        return buildingListener;
-    }
-
-    public BuildBuildingListener getBuildSolarPanel() {
-        return buildSolarPanel;
-    }
-
-    public BuildBuildingListener getBuildWindTurbine() {
-        return buildWindTurbine;
-    }
-
-    public BuildBuildingListener getBuildHydrauPowerPlant() {
-        return buildHydroPowerPlant;
-    }
-
-    public BuildBuildingListener getBuildCoalPowerPlant() {
-        return buildCoalPowerPlant;
-    }
-
-    public BuildBuildingListener getBuildGasPowerPlant() {
-        return buildGasPowerPlant;
-    }
-
-    public BuildBuildingListener getBuildNuclearPowerPlant() {
-        return buildNuclearPowerPlant;
     }
 
     public PlaceBuildingListener getPlaceBuildingListener() {

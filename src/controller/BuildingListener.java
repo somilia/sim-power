@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 public class BuildingListener implements ActionListener {
 
     private GameController gameController;
-    private BuildingViewable buildingViewable;
-    private boolean canCollectMoney;
-    private boolean canPlaceBuilding;
+    private BuildingViewable buildingViewable;//< Vue auquel est associé ce listener
+    private boolean canCollectMoney;//< si vrai, on peut cliquer sur la vue pour récolter l'argent
+    private boolean canPlaceBuilding;//< si vrai, permet de cliquer sur la vue pour le placer
 
     public BuildingListener(GameController gameController, BuildingViewable buildingViewable){
         this.gameController = gameController;
@@ -33,9 +33,6 @@ public class BuildingListener implements ActionListener {
 
     }
 
-    public void setBuildingViewable(BuildingViewable buildingViewable){
-        this.buildingViewable = buildingViewable;
-    }
 
     public void setCanCollectMoney(boolean b){
         this.canCollectMoney = b;

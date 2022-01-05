@@ -21,16 +21,6 @@ public class Box
     private EnergySources energySource;
     private Home home;
 
-    public Box(){
-        wind = 1;
-        sun = 1;
-        water = 0;
-
-        containEnergySource=false;
-        containHome = false;
-        //TODO
-    }
-
     public Box(double _wind, double _sun, double _water, boolean _gas, boolean _coal, boolean _uranium){
         wind = _wind;
         sun = _sun;
@@ -41,42 +31,40 @@ public class Box
     }
 
     public void addBuilding(BuildingType type){
-        System.out.println("type in switch : "+type);
-        switch (type){
-            case SOLAR :
+        switch (type) {
+            case SOLAR -> {
                 this.energySource = new SolarPanel(this);
                 this.containEnergySource = true;
-                break;
-            case WIND:
+            }
+            case WIND -> {
                 this.energySource = new WindTurbine(this);
                 this.containEnergySource = true;
-                break;
-            case WATER:
+            }
+            case WATER -> {
                 this.energySource = new HydroPowerPlant(this);
                 this.containEnergySource = true;
-                break;
-            case NUCLEAR:
+            }
+            case NUCLEAR -> {
                 this.energySource = new NuclearPowerPlant(this);
                 this.containEnergySource = true;
-                break;
-            case GAS:
+            }
+            case GAS -> {
                 this.energySource = new GasPowerPlant(this);
                 this.containEnergySource = true;
-                break;
-            case COAL:
+            }
+            case COAL -> {
                 this.energySource = new CoalPowerPlant(this);
                 this.containEnergySource = true;
-                break;
-            case HOUSE:
+            }
+            case HOUSE -> {
                 this.home = new House();
                 this.containHome = true;
-                break;
-            case APPARTEMENT:
+            }
+            case APPARTEMENT -> {
                 this.home = new AppartementBuilding();
                 this.containHome = true;
-                break;
-            default:
-                throw new IllegalArgumentException("Building type for energySource not valid");
+            }
+            default -> throw new IllegalArgumentException("Building type for energySource not valid");
         }
     }
 
@@ -131,14 +119,6 @@ public class Box
 
     public boolean hasCoal() {
         return coal;
-    }
-
-    public void setWind(double wind) {
-        this.wind = wind;
-    }
-
-    public void setSun(double sun) {
-        this.sun = sun;
     }
 
     public void setWater(double water) {

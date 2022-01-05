@@ -1,6 +1,5 @@
 package controller;
 
-import view.MenuFrame;
 import view.MenuViewable;
 
 import java.awt.event.ActionEvent;

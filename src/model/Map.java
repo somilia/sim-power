@@ -2,7 +2,7 @@ package model;
 
 import patterns.Observable;
 import patterns.InformationObserver;
-import view.HomeObserver;
+import patterns.HomeObserver;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -16,8 +16,7 @@ public class Map extends Observable implements Runnable{
 
     public static final long UPDATE_BOX_DATA_FREQUENCY = 5*1000;
     public static final long UPDATE_GLOBAL_DATA = 5*1000;
-    public static final long UPDATE_USER_MONEY_FREQUENCY = 10*1000;
-    public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 2*1000;
+    public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 30*1000;
 
     public static final int STARTING_AMOUNT = 1000000;
     public static final int STARTING_POPULATION_AVAILABLE = 5;
@@ -37,7 +36,7 @@ public class Map extends Observable implements Runnable{
     private Box[][] boxList;
     private int[][] buildingMoneyAmount;
 
-
+    private volatile boolean isRunning;//< volatile pour que la valeur soit toujours à jour, au cas ou un autre thread voudrait interrompre celui-ci
 
     public Map() {
 
@@ -52,12 +51,12 @@ public class Map extends Observable implements Runnable{
         nbOfRenewableEnergy = 0.0;
 
         buildingMoneyAmount = new int[NB_BOX_X][NB_BOX_Y];
-        for (int[] i : buildingMoneyAmount) {
-            for(int j : i){
-                j = 0;
+
+        for(int i=0;i<NB_BOX_X;i++){
+            for(int j=0; j<NB_BOX_Y;j++){
+                buildingMoneyAmount[i][j]=0;
             }
         }
-
 
 
         boxList = new Box[NB_BOX_X][NB_BOX_Y];
@@ -84,6 +83,8 @@ public class Map extends Observable implements Runnable{
         }
 
         randomStartRiverGeneration();
+
+        isRunning=true;
 
         this.informationObserverList = new ArrayList<>();
         this.homeObserverList = new ArrayList<>();
@@ -132,10 +133,6 @@ public class Map extends Observable implements Runnable{
         }
     }
 
-    private void addPopulationMax(int n){
-        this.populationMax+=n;
-    }
-
     /**
      * Permet de mettre a jour la population
      * Si il y a de la population disponible, on parcours les Home de la map et si elle ne sont pas remplies, on les remplis jusqu'à ce qu'elles soient pleines ou qu'il n'y est plus de population disponible
@@ -176,7 +173,6 @@ public class Map extends Observable implements Runnable{
             this.pollutionRate = 0.0;
         else
             this.pollutionRate = nbOfFossilEnergy/(nbOfFossilEnergy+nbOfRenewableEnergy);
-        //TODO change into calculate the ration between the energy produced by fossil and renewable
     }
 
     private void updateMoneyCollect(){
@@ -184,7 +180,7 @@ public class Map extends Observable implements Runnable{
         for (Box[] array :boxList) {
             for (Box box:array) {
                 if (box.getContainHome()){
-                    if(System.currentTimeMillis()-box.getHome().getLastMoneyCollect() >= box.getHome().getMoneyFrequency()){
+                    if(System.currentTimeMillis()-box.getHome().getLastMoneyCollect() >= box.getHome().getMoneyFrequency() && box.getHome().getNbOfHabitants()>0){
                         notifyHomeObservers(i,j);
                         box.getHome().setLastMoneyCollect(System.currentTimeMillis());
                         buildingMoneyAmount[i][j]+=box.getHome().genMoney();
@@ -201,6 +197,7 @@ public class Map extends Observable implements Runnable{
         this.userMoney += buildingMoneyAmount[x][y];
         buildingMoneyAmount[x][y]=0;
         notifyInformationObservers();
+
     }
 
     private void updateEnergyProduced(){
@@ -236,8 +233,7 @@ public class Map extends Observable implements Runnable{
     }
 
     public void buildBuilding(int posX, int posY, BuildingType type) {
-        System.out.println("type : "+type);
-        boxList[posX][posY].addBuilding(type);//TODO try catch ?
+        boxList[posX][posY].addBuilding(type);
         userMoney-= type.price;
 
         if(type == BuildingType.HOUSE || type==BuildingType.APPARTEMENT){
@@ -270,14 +266,10 @@ public class Map extends Observable implements Runnable{
 
     private void updateGlobalData(){
 
-        //updatePopulationAvailable();
         updatePopulation();
-        //updateUserMoney();
         updateEnergyProduced();
         updateEnergyPrice();
         updatePollutionRate();
-
-
     }
 
 
@@ -287,11 +279,10 @@ public class Map extends Observable implements Runnable{
     public void run() {
 
         long boxLastUpdate=System.currentTimeMillis();
-        long userMoneyLastUpdate=System.currentTimeMillis();
         long populationAvailableLastUpdate=System.currentTimeMillis();
         long globalDataLastUpdate=System.currentTimeMillis();
 
-        while(true){
+        while(isRunning){
 
             if(System.currentTimeMillis()-boxLastUpdate >= UPDATE_BOX_DATA_FREQUENCY) {
                 updateBoxData();
@@ -299,11 +290,6 @@ public class Map extends Observable implements Runnable{
                 boxLastUpdate=System.currentTimeMillis();
             }
             updateMoneyCollect();
-            /*if(System.currentTimeMillis()-userMoneyLastUpdate >= UPDATE_USER_MONEY_FREQUENCY) {
-                updateUserMoney();
-                notifyObservers();
-                userMoneyLastUpdate=System.currentTimeMillis();
-            }*/
             if(System.currentTimeMillis()-populationAvailableLastUpdate>= UPDATE_POPULATION_AVAILABLE_FREQUENCY) {
                 updatePopulationAvailable();
                 notifyInformationObservers();
@@ -314,11 +300,6 @@ public class Map extends Observable implements Runnable{
                 notifyInformationObservers();
                 globalDataLastUpdate=System.currentTimeMillis();
             }
-            /*try {
-                Thread.sleep(UPDATE_BOX_DATA_FREQUENCY *1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
         }
     }
 
@@ -336,9 +317,7 @@ public class Map extends Observable implements Runnable{
     }
 
     public boolean randomFossilGen(int i, int j, int x, int y) {
-        if(((i+2==x)||(i-2==x) || (i+1==x)||(i-1==x) || (i==x)) && ((j+2==y)||(j-2==y) || (j+1==y)||(j-1==y) || (j==y)) && !(((i+2==x)&&(j+2==y)||(i-2==x)&&(j-2==y)||(i+2==x)&&(j-2==y)||(i-2==x)&&(j+2==y)))){
-            return true;
-        }else {return false;}
+        return ((i + 2 == x) || (i - 2 == x) || (i + 1 == x) || (i - 1 == x) || (i == x)) && ((j + 2 == y) || (j - 2 == y) || (j + 1 == y) || (j - 1 == y) || (j == y)) && !(((i + 2 == x) && (j + 2 == y) || (i - 2 == x) && (j - 2 == y) || (i + 2 == x) && (j - 2 == y) || (i - 2 == x) && (j + 2 == y)));
     }
 
     private void randomStartRiverGeneration(){
@@ -351,7 +330,6 @@ public class Map extends Observable implements Runnable{
         if(a==0){
             Random s0 = new Random();
             startingPosX= s0.nextInt(NB_BOX_X-BOUNDS_X*2)+BOUNDS_X-1;
-            startingPosY=0;
             for(startingPosY=0;startingPosY<5;startingPosY++){
                 boxList[startingPosX][startingPosY].setWater(1.0);
             }
@@ -361,7 +339,6 @@ public class Map extends Observable implements Runnable{
         else if(a==1){
             Random s1 = new Random();
             startingPosX= s1.nextInt(NB_BOX_X-BOUNDS_X*2)+BOUNDS_X-1;
-            startingPosY=NB_BOX_Y-1;
             for(startingPosY=NB_BOX_Y-1;startingPosY>NB_BOX_Y-5;startingPosY--){
                 boxList[startingPosX][startingPosY].setWater(1.0);
             }
@@ -370,19 +347,16 @@ public class Map extends Observable implements Runnable{
         }
         else if(a==2){
             Random s2 = new Random();
-            int b2 = s2.nextInt(NB_BOX_Y-BOUNDS_Y*2)+BOUNDS_Y-1;
-            startingPosX=NB_BOX_X-1;
-            startingPosY=b2;
+            startingPosY= s2.nextInt(NB_BOX_Y-BOUNDS_Y*2)+BOUNDS_Y-1;
             for(startingPosX=NB_BOX_X-1;startingPosX>NB_BOX_X-5;startingPosX--){
                 boxList[startingPosX][startingPosY].setWater(1.0);
             }
 
             randomRiverGeneration(0.2, 0.5, startingPosX, startingPosY);
         }
-        else if(a==3){
+        else {
             Random s3 = new Random();
             int b3 = s3.nextInt(NB_BOX_Y-BOUNDS_Y*2)+BOUNDS_Y-1;
-            startingPosX=0;
             startingPosY=b3;
             for(startingPosX=0;startingPosX<5;startingPosX++){
                 boxList[startingPosX][startingPosY].setWater(1.0);
@@ -425,30 +399,6 @@ public class Map extends Observable implements Runnable{
     }
 
     public Box[][] getBoxList() { return boxList; }
-
-    public int getPopulation() {
-        return population;
-    }
-
-    public int getPopulationAvailable() {
-        return populationAvailable;
-    }
-
-    public double getEnergyProduced() {
-        return energyProduced;
-    }
-
-    public double getEnergyPrice() {
-        return energyPrice;
-    }
-
-    public double getPollutionRate() {
-        return pollutionRate;
-    }
-
-    public int getUserMoney() {
-        return userMoney;
-    }
 
 
 }

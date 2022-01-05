@@ -16,7 +16,4 @@ public abstract class EnergySources extends Building {
         return elecricityProduced;
     }
 
-    public BuildingType getType() {
-        return type;
-    }
 }

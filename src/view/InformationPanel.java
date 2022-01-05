@@ -10,8 +10,6 @@ public class InformationPanel extends JPanel implements InformationObserver {
 
     public static final int INFO_PANEL_WHIDTH = 1024;
     public static final int INFO_PANEL_HEIGHT = 50;
-    public static final int INFO_PANEL_COORD_X = 0;
-    public static final int INFO_PANEL_COORD_Y = 0;
 
     private JLabel populationLabel;
     private JLabel populationAvailableLabel;
@@ -70,11 +68,11 @@ public class InformationPanel extends JPanel implements InformationObserver {
      */
     @Override
     public void update(int population, int populationAvailable, int populationMax, double energyProduced, double energyPrice, double pollutionRate, int userMoney) {
-        populationLabel.setText(String.valueOf("Population : " + population)+"/"+String.valueOf(populationMax));
-        populationAvailableLabel.setText(String.valueOf("Population available : "+populationAvailable));
+        populationLabel.setText("Population : " + population + "/" + populationMax);
+        populationAvailableLabel.setText("Population available : " + populationAvailable);
         energyProducedLabel.setText(String.format("Energy produced : %.2f" ,energyProduced));
         energyPriceLabel.setText(String.format("Energy price : %.3f",energyPrice));
         pollutionRateLabel.setText(String.format("Pollution rate : %.2f",pollutionRate));//TODO mettre en rouge quand depasse les 75% par exemple
-        userMoneyLabel.setText(String.valueOf("Ressources : "+userMoney));
+        userMoneyLabel.setText("Ressources : " + userMoney);
     }
 }

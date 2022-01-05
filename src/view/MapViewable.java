@@ -2,14 +2,14 @@ package view;
 
 import controller.PlaceBuildingListener;
 import model.Box;
-import model.BuildingType;
+import patterns.HomeObserver;
 
-public interface MapViewable extends HomeObserver{
+public interface MapViewable extends HomeObserver {
 
-    public void initializeMap(Box[][] boxes);
-    public void addBuilding(BuildingView buildingView, int positionX, int positionY);
-    public void removeBuilding(BuildingView buildingView, int positionX, int positionY);
-    public void addPlaceBuildingListener(PlaceBuildingListener placeBuildingListener);
+    void initializeMap(Box[][] boxes);
+    void addBuilding(BuildingViewable buildingView, int positionX, int positionY);
+    void removeBuilding(BuildingViewable buildingView, int positionX, int positionY);
+    void addPlaceBuildingListener(PlaceBuildingListener placeBuildingListener);
 
     void repaint();
 }

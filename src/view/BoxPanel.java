@@ -9,13 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
-public class BoxPanel extends JPanel{
+public class BoxPanel extends JPanel implements BoxViewable{
 
     int positionX;
     int positionY;
 
     BufferedImage image;
-    BuildingView buildingView;
+    BuildingViewable buildingView;
 
     BoxPanel(Box[][] boxes, int x, int y) {
         URL resource;
@@ -55,20 +55,20 @@ public class BoxPanel extends JPanel{
         g.drawImage(image, 0, 0, null);
     }
 
-    public void addBuilding(BuildingView buildingView){
+    public void addBuilding(BuildingViewable buildingView){
         this.buildingView = buildingView;
-        this.add(buildingView);
+        this.add((BuildingView) buildingView);
         this.repaint();
     }
 
-    public void removeBuilding(BuildingView buildingView){
+    public void removeBuilding(BuildingViewable buildingView){
         this.buildingView = null;
-        this.remove(buildingView);
+        this.remove((BuildingView) buildingView);
         this.repaint();
     }
 
 
-    public BuildingView getBuildingView() {
+    public BuildingViewable getBuildingView() {
         return buildingView;
     }
 }
