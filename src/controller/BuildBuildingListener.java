@@ -39,7 +39,7 @@ public class BuildBuildingListener implements ActionListener {
             gameController.getPlaceBuildingListener().activatePlacingBuilding(tempBuildingView, buildingType);//On active le Listener PlaceBuildingListener pour pouvoir placer le bâtiment en bougeant la souris
             gameController.getMenu().setVisible(false);
         }
-        else{
+        else if(!gameController.getModel().hasEnoughMoney(buildingType)){
             gameController.getMenu().printErrorMessage("Not enough money");
         }
     }

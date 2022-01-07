@@ -1,21 +1,27 @@
 package view;
 
 import controller.BuildBuildingListener;
+import model.BuildingType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
+
+/**
+ * Cette classe est une vue qui permet d'afficher le menu du jeu qui permet d'acheter des bâtiment.
+ * Elle hérite de JFrame car elle correspond à une fenêtre
+ */
 public class MenuFrame extends JFrame implements MenuViewable{
 
-    private JTabbedPane menuPane;
+    private JTabbedPane menuPane;//< vue qui contient plusieurs onglets, un pour chaque catégorie de bâtiment
 
-    private JLabel error1;
+    private JLabel error1;//< labels qui permettent d'afficher un message d'erreur
     private JLabel error2;
     private JLabel error3;
 
-    private JButton coalBuildBtn;
+    private JButton coalBuildBtn;//< boutons pour acheter un bâtiment en particulier
     private JButton gasBuildBtn;
     private JButton nuclearBuildBtn;
     private JButton solarBuildBtn;
@@ -31,7 +37,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         this.setLocationRelativeTo( null );
         this.setSize(new Dimension(600, 300));
 
-        solarBuildBtn = new JButton("Solar Panel");
+        solarBuildBtn = new JButton("Solar Panel");//On définit pour chaque bouton son titre, son listener et son icon
         solarBuildBtn.addActionListener(solarLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/panel.png")));
@@ -40,6 +46,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         solarBuildBtn.repaint();
+
         windBuildBtn = new JButton("Wind turbine");
         windBuildBtn.addActionListener(windLst);
         try {
@@ -49,6 +56,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         windBuildBtn.repaint();
+
         hydroBuildBtn = new JButton("Hydro power Plant");
         hydroBuildBtn.addActionListener(waterLst);
         try {
@@ -58,6 +66,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         hydroBuildBtn.repaint();
+
         coalBuildBtn = new JButton("Coal power plant");
         coalBuildBtn.addActionListener(coalLst);
         try {
@@ -67,6 +76,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         coalBuildBtn.repaint();
+
         gasBuildBtn = new JButton("Gas power plant");
         gasBuildBtn.addActionListener(gasLst);
         try {
@@ -76,6 +86,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         gasBuildBtn.repaint();
+
         nuclearBuildBtn = new JButton("Nuclear power plant");
         nuclearBuildBtn.addActionListener(nuclearLst);
         try {
@@ -85,6 +96,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         nuclearBuildBtn.repaint();
+
         houseBuildBtn = new JButton("Home");
         houseBuildBtn.addActionListener(houseLst);
         try {
@@ -94,6 +106,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
             e.printStackTrace();
         }
         houseBuildBtn.repaint();
+
         appartementBuildBtn = new JButton("Appartement building");
         appartementBuildBtn.addActionListener(appartementLst);
         try {
@@ -114,7 +127,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         FlowLayout panelLayout = new FlowLayout(FlowLayout.CENTER);
 
 
-        JPanel renewablePanel = new JPanel();
+        JPanel renewablePanel = new JPanel();//On créé un panel pour contenir les boutons dans chaque onglet du JTabbedPane.
         renewablePanel.add(solarBuildBtn);
         renewablePanel.add(windBuildBtn);
         renewablePanel.add(hydroBuildBtn);
@@ -155,7 +168,6 @@ public class MenuFrame extends JFrame implements MenuViewable{
 
     @Override
     public void printErrorMessage(String message) {
-        //TODO
         error1.setText(message);
         error1.setVisible(true);
         error2.setText(message);
@@ -163,14 +175,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         error3.setText(message);
         error3.setVisible(true);
         long Visible = System.currentTimeMillis();
-       /* while(error1.isVisible()){
-            if(System.currentTimeMillis()-Visible >= 100){ // il ne veut pas apparaitre et disparaitre
-                error1.setVisible(false);
-                error2.setVisible(false);
-                error3.setVisible(false);
-            }
 
-        }*/
     }
 
 }

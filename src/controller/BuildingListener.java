@@ -5,6 +5,10 @@ import view.BuildingViewable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * BuildingListener est un Listener pour les vues de bâtiment.
+ * Ainsi il permet de gérer l'évènement de click sur la vue d'un bâtiment.
+ */
 public class BuildingListener implements ActionListener {
 
     private GameController gameController;
@@ -19,14 +23,16 @@ public class BuildingListener implements ActionListener {
         this.canPlaceBuilding=true;
     }
 
-
+    /**
+     *Est appelé lorsque l'on clique sur la vue d'un bâtiment
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(canPlaceBuilding){
-            canPlaceBuilding = !gameController.getPlaceBuildingListener().mouseClicked();
+            canPlaceBuilding = !gameController.getPlaceBuildingListener().mouseClicked();//Si le bâtiment a finit d'être placé, alors la méthode mouseClicked() renvoie true. Si elle renvoie true alors canPlaceBuilding=false et on ne peut plus le placer.
         }
         if(canCollectMoney){
-            gameController.getModel().addMoney(buildingViewable.getPositionX(), buildingViewable.getPositionY());
+            gameController.getModel().addMoney(buildingViewable.getPositionX(), buildingViewable.getPositionY());//Si on peut collecter l'argent alors on appelle dit au Controller d'appeler la méthode appropriée du Model
             buildingViewable.setImageNoMoney();
             canCollectMoney=false;
         }

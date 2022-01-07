@@ -11,17 +11,22 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
+/**
+ * Classe qui correspond à la vue d'un bâtiment
+ * Cette classe hérite de JButton ce qui simplifie le fait de pouvoir cliquer sur les bâtiments
+ * Cette classe implémente l'interface BuildingViewable pour implémenter toutes les méthodes nécessaires au bon affichage de la vue
+ */
 public class BuildingView extends JButton implements BuildingViewable{
 
     private BufferedImage imageWithoutMoney;
     private BufferedImage imageWithMoney;
 
-    private Boolean collectMoney;
+    private Boolean collectMoney;//< Vrai si on peut cliquer sur la vue pour collecter l'argent
 
-    private int positionX;
-    private int positionY;
+    private int positionX;//< abscisse de la vue
+    private int positionY;//< ordonnées de la vue
 
-    private BuildingListener buildingListener;
+    private BuildingListener buildingListener;//< Listener qui gère les clics sur la vue
 
     public BuildingView(BuildingType type, GameController gameController){
 
@@ -32,7 +37,7 @@ public class BuildingView extends JButton implements BuildingViewable{
         URL resourceWithoutMoney;
         URL resourceWithMoney=null;
 
-        switch (type) { // choisir l'image en fonction du type de bâtiment
+        switch (type) { // choisit l'image en fonction du type de bâtiment
 
             case NUCLEAR -> resourceWithoutMoney = getClass().getResource("/res/img/nuclear.png");
             case GAS -> resourceWithoutMoney = getClass().getResource("/res/img/gaspower.png");
@@ -82,12 +87,18 @@ public class BuildingView extends JButton implements BuildingViewable{
         }
     }
 
+    /**
+     * modifie l'icon de la vue pour afficher celui sans argent pour représenter le fait que la collecte d'argent n'est plus possible
+     */
     public void setImageMoneyCollect(){
         this.collectMoney = true;
         buildingListener.setCanCollectMoney(true);
         this.repaint();
     }
 
+    /**
+     * @return l'abscisse de la vue
+     */
     public void setImageNoMoney(){
         this.collectMoney = false;
         this.repaint();
@@ -99,15 +110,14 @@ public class BuildingView extends JButton implements BuildingViewable{
         return positionX;
     }
 
-    public void setPositionX(int positionX) {
-        this.positionX = positionX;
-    }
-
     public int getPositionY() {
         return positionY;
     }
 
-    public void setPositionY(int positionY) {
-        this.positionY = positionY;
+    @Override
+    public void setPosition(int x, int y) {
+        this.positionX=x;
+        this.positionY=y;
     }
+
 }

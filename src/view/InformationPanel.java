@@ -6,19 +6,23 @@ import patterns.InformationObserver;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Cette classe est une vue qui hérite de JPanel car elle va contenir des vues qui vont afficher des données
+ * Cette classe implémente InformationObserver car elle contient les vues qui affiche ces données
+ */
 public class InformationPanel extends JPanel implements InformationObserver {
 
     public static final int INFO_PANEL_WHIDTH = 1024;
     public static final int INFO_PANEL_HEIGHT = 50;
 
-    private JLabel populationLabel;
-    private JLabel populationAvailableLabel;
-    private JLabel energyProducedLabel;
-    private JLabel energyPriceLabel;
-    private JLabel pollutionRateLabel;
-    private JLabel userMoneyLabel;
+    private JLabel populationLabel;//< label qui affiche la population
+    private JLabel populationAvailableLabel;//< label qui affiche la population disponible
+    private JLabel energyProducedLabel;//< label qui affiche l'énergie produite
+    private JLabel energyPriceLabel;//< label qui affiche le prix de l'énergie
+    private JLabel pollutionRateLabel;//< label qui affiche le taux de pollution
+    private JLabel userMoneyLabel;//< label qui affiche l'argent du joueur
 
-    private JButton menuBtn;
+    private JButton menuBtn;//< bouton qui permet d'ouvrir le menu
 
     public InformationPanel(OpenMenuListener openMenuListener){
 
@@ -72,7 +76,7 @@ public class InformationPanel extends JPanel implements InformationObserver {
         populationAvailableLabel.setText("Population available : " + populationAvailable);
         energyProducedLabel.setText(String.format("Energy produced : %.2f" ,energyProduced));
         energyPriceLabel.setText(String.format("Energy price : %.3f",energyPrice));
-        pollutionRateLabel.setText(String.format("Pollution rate : %.2f",pollutionRate));//TODO mettre en rouge quand depasse les 75% par exemple
-        userMoneyLabel.setText("Ressources : " + userMoney);
+        pollutionRateLabel.setText(String.format("Pollution rate : %.2f",pollutionRate));
+        userMoneyLabel.setText("Money : " + userMoney);
     }
 }

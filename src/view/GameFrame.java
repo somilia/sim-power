@@ -5,10 +5,13 @@ import patterns.InformationObserver;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe qui permet d'afficher la fenêtre principale du jeu
+ */
 public class GameFrame extends JFrame {
 
-    private MapPanel mapPanel;
-    private InformationPanel informationPanel;
+    private MapPanel mapPanel;//< panel permettant d'afficher la Map
+    private InformationPanel informationPanel;//< panel permettant d'afficher les données globales
 
     public GameFrame(MapViewable mapPanel, InformationObserver informationPanel) {
         super();
