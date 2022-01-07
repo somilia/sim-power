@@ -96,9 +96,6 @@ public class BuildingView extends JButton implements BuildingViewable{
         this.repaint();
     }
 
-    /**
-     * @return l'abscisse de la vue
-     */
     public void setImageNoMoney(){
         this.collectMoney = false;
         this.repaint();

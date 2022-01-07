@@ -2,6 +2,9 @@ package model;
 
 import model.EnergySources;
 
+/**
+ * Modélise les sources d'énergies renouvelables
+ */
 public abstract class RenewableEnergy extends EnergySources
 {
 
