@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="sim-power:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/sim_power_jar</output-path>
+    <root id="archive" name="sim-power.jar">
+      <element id="module-output" name="sim-power" />
+    </root>
+  </artifact>
+</component>
