@@ -39,7 +39,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         this.setLocationRelativeTo( null );
         this.setSize(new Dimension(600, 300));
 
-        solarBuildBtn = new JButton("Solar Panel");//On définit pour chaque bouton son titre, son listener et son icon
+        solarBuildBtn = new JButton("<html>Solar Panel<br>"+BuildingType.SOLAR.price+"$");//On définit pour chaque bouton son titre, son listener et son icon
         solarBuildBtn.addActionListener(solarLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/panel.png")));
@@ -49,7 +49,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         solarBuildBtn.repaint();
 
-        windBuildBtn = new JButton("Wind turbine");
+        windBuildBtn = new JButton("<html>Wind turbine<br>"+BuildingType.WIND.price+"$");
         windBuildBtn.addActionListener(windLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/turbine.png")));
@@ -59,7 +59,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         windBuildBtn.repaint();
 
-        hydroBuildBtn = new JButton("Hydro power Plant");
+        hydroBuildBtn = new JButton("<html>Hydro power plant<br>"+BuildingType.WATER.price+"$");
         hydroBuildBtn.addActionListener(waterLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/hydropower.png")));
@@ -69,7 +69,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         hydroBuildBtn.repaint();
 
-        coalBuildBtn = new JButton("Coal power plant");
+        coalBuildBtn = new JButton("<html>Coal power plant<br>"+BuildingType.COAL.price+"$");
         coalBuildBtn.addActionListener(coalLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/coalpower.png")));
@@ -79,7 +79,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         coalBuildBtn.repaint();
 
-        gasBuildBtn = new JButton("Gas power plant");
+        gasBuildBtn = new JButton("<html>Gas power plant<br>"+BuildingType.GAS.price+"$");
         gasBuildBtn.addActionListener(gasLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/gaspower.png")));
@@ -89,7 +89,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         gasBuildBtn.repaint();
 
-        nuclearBuildBtn = new JButton("Nuclear power plant");
+        nuclearBuildBtn = new JButton("<html>Nuclear power plant<br>"+BuildingType.NUCLEAR.price+"$");
         nuclearBuildBtn.addActionListener(nuclearLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/nuclear.png")));
@@ -99,7 +99,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         nuclearBuildBtn.repaint();
 
-        houseBuildBtn = new JButton("Home");
+        houseBuildBtn = new JButton("<html>House<br>"+BuildingType.HOUSE.price+"$");
         houseBuildBtn.addActionListener(houseLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/house.png")));
@@ -109,7 +109,7 @@ public class MenuFrame extends JFrame implements MenuViewable{
         }
         houseBuildBtn.repaint();
 
-        appartementBuildBtn = new JButton("Appartement building");
+        appartementBuildBtn = new JButton("<html>Appartement Building<br>"+BuildingType.APPARTEMENT.price+"$");
         appartementBuildBtn.addActionListener(appartementLst);
         try {
             Image img = ImageIO.read(Objects.requireNonNull(getClass().getResource("/res/img/appartement.png")));

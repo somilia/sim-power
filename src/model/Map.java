@@ -25,7 +25,7 @@ public class Map extends Observable implements Runnable{
     public static final long UPDATE_GLOBAL_DATA = 5*1000;//< fréquence de mise à jour des données globales (population, energyProduced, pollutionRate ...)
     public static final long UPDATE_POPULATION_AVAILABLE_FREQUENCY = 30*1000;//< fréquence de mise à jour de la population disponible
 
-    public static final int STARTING_AMOUNT = 10000;//< montant d'argent de départ pour le joueur
+    public static final int STARTING_AMOUNT = 10000000;//< montant d'argent de départ pour le joueur
     public static final int STARTING_POPULATION_AVAILABLE = 5;//< population disponible de départ
 
 
