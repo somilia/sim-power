@@ -6,6 +6,8 @@ import model.BuildingType;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Objects;
 
 
@@ -168,14 +170,23 @@ public class MenuFrame extends JFrame implements MenuViewable{
 
     @Override
     public void printErrorMessage(String message) {
+        //TODO
         error1.setText(message);
         error1.setVisible(true);
         error2.setText(message);
         error2.setVisible(true);
         error3.setText(message);
         error3.setVisible(true);
-        long Visible = System.currentTimeMillis();
-
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                error1.setVisible(false);
+                error2.setVisible(false);
+                error3.setVisible(false);
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
 }

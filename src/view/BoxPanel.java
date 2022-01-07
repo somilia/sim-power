@@ -27,9 +27,9 @@ public class BoxPanel extends JPanel implements BoxViewable{
 
         //récupération du bon icon selon les caractéristiques de la Box dans le model
         if (boxes[x][y].getWater()!=0) {resource = getClass().getResource("/res/img/water.png");}
-        else if (boxes[x][y].hasCoal() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/coal.png");}
-        else if (boxes[x][y].hasGas() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/gas.png");}
-        else if (boxes[x][y].hasUranium() && boxes[x][y].getWind()<15 && boxes[x][y].getSun()<15) {resource = getClass().getResource("/res/img/uranium.png");}
+        else if (boxes[x][y].hasCoal() && boxes[x][y].getWind()<=15 && boxes[x][y].getSun()<=15) {resource = getClass().getResource("/res/img/coal.png");}
+        else if (boxes[x][y].hasGas() && boxes[x][y].getWind()<=15 && boxes[x][y].getSun()<=15) {resource = getClass().getResource("/res/img/gas.png");}
+        else if (boxes[x][y].hasUranium() && boxes[x][y].getWind()<=15 && boxes[x][y].getSun()<=15) {resource = getClass().getResource("/res/img/uranium.png");}
 
         else if (boxes[x][y].getWind()>15 && !boxes[x][y].hasCoal() && !boxes[x][y].hasGas() && !boxes[x][y].hasUranium()) {resource = getClass().getResource("/res/img/wind.png");}
         else if (boxes[x][y].getWind()>15 && boxes[x][y].hasCoal()) {resource = getClass().getResource("/res/img/coal_wind.png");}
